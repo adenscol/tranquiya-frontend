@@ -1,0 +1,37 @@
+# Habilitar mod_rewrite
+RewriteEngine On
+
+# Redirigir de HTTP a HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirigir www a non-www
+RewriteCond %{HTTP_HOST} ^www\.tranquiya\.com [NC]
+RewriteRule ^(.*)$ https://tranquiya.com/$1 [L,R=301]
+
+# Redirigir /index.html a /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ https://tranquiya.com/ [R=301,L]
+
+# Redirigir /cliente-portal.html a /portal-clientes
+RewriteRule ^cliente-portal\.html$ /portal-clientes [R=301,L]
+RewriteRule ^portal-clientes$ cliente-portal.html [L]
+
+# Redirigir /portal-admin.html a /portal-admin
+RewriteRule ^portal-admin\.html$ /portal-admin [R=301,L]
+RewriteRule ^portal-admin$ portal-admin.html [L]
+
+# Comprimir archivos
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache control
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

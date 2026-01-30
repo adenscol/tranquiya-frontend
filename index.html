@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<!-- v2026011430 - Menú móvil funcional + diseño responsive mejorado -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="kAZCJW-hvdxi0VtGpsL9ri_Kptumeaw6ub837bg8OqU">
+    <meta name="description" content="TranquiYa — Créditos en línea rápidos y seguros. Préstamos de $100.000 a $2.000.000, incluso para reportados. Respuesta rápida, sin papeleo y con pocos requisitos.">
+    <meta name="keywords" content="créditos online, préstamos rápidos, créditos para reportados, préstamos Colombia, dinero rápido">
+    <meta http-equiv="Permissions-Policy" content="camera=*, microphone=*">
+    <meta name="permissions-policy" content="camera=*, microphone=*">
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="apple-touch-icon" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logo.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tranquiya.com/">
+    <meta property="og:title" content="TranquiYa | Créditos en línea | Préstamos seguros Online">
+    <meta property="og:description" content="TranquiYa — Créditos en línea rápidos y seguros. Préstamos de $100.000 a $2.000.000, incluso para reportados. Respuesta rápida, sin papeleo y con pocos requisitos.">
+    <meta property="og:image" content="https://tranquiya.com/img/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tranquiya.com/">
+    <meta property="twitter:title" content="TranquiYa | Créditos en línea | Préstamos seguros Online">
+    <meta property="twitter:description" content="TranquiYa — Créditos en línea rápidos y seguros. Préstamos de $100.000 a $2.000.000, incluso para reportados.">
+    <meta property="twitter:image" content="https://tranquiya.com/img/logo.png">
+
+    <title>TranquiYa | Créditos en línea | Préstamos seguros Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=202601301020">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Tranqui<span>Ya</span></h1>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#proceso">Proceso</a></li>
+                    <li><a href="#requisitos">Requisitos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#" class="btn-login">Iniciar Sesión</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Créditos en línea</h2>
+                    <h3>Fácil, rápido y sin filas</h3>
+                    <p>Obtén tu préstamo en menos de 24 horas. Sin papeleos ni fiador.</p>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <span class="material-icons icon-check">check_circle</span>
+                            <span>100% en línea</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="material-icons icon-check">check_circle</span>
+                            <span>Sin historial crediticio</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="material-icons icon-check">check_circle</span>
+                            <span>Respuesta en 24 horas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-calculator">
+                    <div class="calculator-card">
+                        <!-- Vista Calculadora -->
+                        <div id="calculatorView">
+                            <h4>Simula tu crédito</h4>
+                            <div class="calculator-form">
+                                <div class="form-group">
+                                    <label>¿Cuánto necesitas?</label>
+                                    <div class="amount-display">
+                                        <span class="currency">$</span>
+                                        <span id="amountValue">500000</span>
+                                    </div>
+                                    <input type="range" id="amountSlider" min="150000" max="2000000" step="50000" value="500000" class="slider">
+                                    <div class="slider-labels">
+                                        <span>$150.000</span>
+                                        <span>$2.000.000</span>
+                                    </div>
+                                </div>
+                                <div class="payment-options">
+                                    <!-- Frecuencia de pago - Botones -->
+                                    <div class="selector-group">
+                                        <label>Frecuencia de pago</label>
+                                        <div class="frequency-buttons" id="frequencyButtons">
+                                            <button type="button" class="freq-btn" data-value="weekly">Semanal</button>
+                                            <button type="button" class="freq-btn active" data-value="biweekly">Quincenal</button>
+                                            <button type="button" class="freq-btn" data-value="monthly">Mensual</button>
+                                        </div>
+                                    </div>
+                                    <!-- Número de cuotas - Botones en grid 3x2 -->
+                                    <div class="selector-group">
+                                        <label>Número de cuotas</label>
+                                        <div class="installments-buttons" id="installmentsButtons">
+                                            <button type="button" class="inst-btn" data-value="1">1</button>
+                                            <button type="button" class="inst-btn" data-value="2">2</button>
+                                            <button type="button" class="inst-btn" data-value="3">3</button>
+                                            <button type="button" class="inst-btn active" data-value="4">4</button>
+                                            <button type="button" class="inst-btn" data-value="5">5</button>
+                                            <button type="button" class="inst-btn" data-value="6">6</button>
+                                        </div>
+                                    </div>
+                                    <!-- Resultado - Dos cuadros -->
+                                    <div class="installment-result-grid">
+                                        <div class="result-box result-cuota">
+                                            <span class="result-label">Pagarás</span>
+                                            <span class="result-amount" id="installmentAmount">$137.500</span>
+                                            <span class="result-detail" id="installmentFrequency">en 4 cuotas quincenales</span>
+                                        </div>
+                                        <div class="result-box result-total">
+                                            <span class="result-label">Total a pagar</span>
+                                            <span class="result-amount" id="totalAmount">$693.500</span>
+                                            <a href="javascript:void(0)" class="result-link" onclick="mostrarPlanPagos()">¿Por qué este valor?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="calculator-buttons">
+                                    <button class="btn-primary btn-request" onclick="scrollToForm()">¡Solicitar ahora!</button>
+                                    <button type="button" class="btn-plan-pagos-small" onclick="mostrarPlanPagos()">
+                                        <span class="material-icons">table_chart</span>
+                                        Ver plan de pagos
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Vista Plan de Pagos (oculta por defecto) -->
+                        <div id="planPagosView" style="display: none;">
+                            <div class="plan-pagos-header-inline">
+                                <h4>Plan de Pagos</h4>
+                                <button type="button" class="btn-close-plan" onclick="volverCalculadora()">×</button>
+                            </div>
+                            <div id="planPagosContent">
+                                <!-- El contenido se genera dinámicamente -->
+                            </div>
+                            <div class="plan-pagos-footer-inline">
+                                <div id="planPagosTotalBox" class="plan-pagos-total-inline">
+                                    <span>TOTAL A PAGAR:</span>
+                                    <span id="planPagosTotalAmount">$0</span>
+                                </div>
+                                <button type="button" class="btn-volver" onclick="volverCalculadora()">
+                                    <span class="material-icons icon-arrow">arrow_back</span>
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Vista Solicitud Inline (oculta por defecto) -->
+                        <div id="solicitudView" style="display: none;">
+                            <div class="solicitud-header-inline">
+                                <h4>Solicita tu crédito</h4>
+                                <button type="button" class="btn-close-plan" onclick="volverCalculadoraDesdeSolicitud()">×</button>
+                            </div>
+                            <!-- Resumen del crédito (siempre visible) -->
+                            <div class="solicitud-resumen">
+                                <div class="resumen-item">
+                                    <span class="resumen-label">Monto:</span>
+                                    <span class="resumen-value" id="solicitudMonto">$500.000</span>
+                                </div>
+                                <div class="resumen-item">
+                                    <span class="resumen-label">Cuotas:</span>
+                                    <span class="resumen-value" id="solicitudCuotas">4 quincenales</span>
+                                </div>
+                                <div class="resumen-item">
+                                    <span class="resumen-label">Total:</span>
+                                    <span class="resumen-value" id="solicitudTotal">$693.500</span>
+                                </div>
+                            </div>
+                            <!-- Progress Steps Inline -->
+                            <div class="progress-inline">
+                                <div class="progress-step-inline active" data-step="1">
+                                    <span class="step-num">1</span>
+                                    <span class="step-text">Datos</span>
+                                </div>
+                                <div class="progress-step-inline" data-step="2">
+                                    <span class="step-num">2</span>
+                                    <span class="step-text">Cédula</span>
+                                </div>
+                                <div class="progress-step-inline" data-step="3">
+                                    <span class="step-num">3</span>
+                                    <span class="step-text">Selfie</span>
+                                </div>
+                                <div class="progress-step-inline" data-step="4">
+                                    <span class="step-num">4</span>
+                                    <span class="step-text">Firma</span>
+                                </div>
+                            </div>
+                            <div class="solicitud-content-inline">
+                                <form id="solicitudInlineForm" class="solicitud-form-inline">
+                                    <!-- PASO 1: Datos Personales y Referencias - CAMPOS GRANDES -->
+                                    <div class="inline-step active" id="inlineStep1">
+                                        <!-- Grupo 1: Datos Personales (ACTIVO al inicio) -->
+                                        <div class="campo-grupo active" id="grupoDatos">
+                                            <div class="grupo-header">
+                                                <span class="grupo-icono">👤</span>
+                                                <span class="grupo-titulo">Datos Personales</span>
+                                            </div>
+                                            <div class="grupo-campos">
+                                                <div class="campo-grande"><label>Nombres</label><input type="text" id="inlineNombres" name="nombres" required placeholder="Juan Carlos"></div>
+                                                <div class="campo-grande"><label>Apellidos</label><input type="text" id="inlineApellidos" name="apellidos" required placeholder="Pérez López"></div>
+                                                <div class="campo-grande"><label>Cédula</label><input type="text" id="inlineCedula" name="cedula" required placeholder="Sin puntos"></div>
+                                                <div class="campo-grande"><label>Fecha Nac.</label><input type="date" id="inlineFechaNac" name="fechaNacimiento" required></div>
+                                                <div class="campo-grande"><label>Celular</label><input type="tel" id="inlineCelular" name="celular" required placeholder="3001234567"></div>
+                                                <div class="campo-grande"><label>Email</label><input type="email" id="inlineEmail" name="email" required placeholder="correo@ejemplo.com"></div>
+                                            </div>
+                                            <div class="grupo-mini" style="display:none;"><span class="mini-datos" id="miniDatos"></span><span class="mini-edit" onclick="editarGrupo('grupoDatos')">✏️</span></div>
+                                        </div>
+
+                                        <!-- Grupo 2: Ocupación -->
+                                        <div class="campo-grupo" id="grupoOcupacion" style="display:none;">
+                                            <div class="grupo-header">
+                                                <span class="grupo-icono">💼</span>
+                                                <span class="grupo-titulo">Ocupación</span>
+                                            </div>
+                                            <div class="grupo-campos">
+                                                <div class="campo-grande"><label>¿Cuál es tu ocupación?</label><select id="inlineOcupacion" name="ocupacion" required onchange="toggleEmpleadoFields()"><option value="">Selecciona</option><option value="empleado">Empleado</option><option value="independiente">Independiente</option></select></div>
+                                                <div id="empleadoFieldsInline" style="display:none;">
+                                                    <div class="campo-grande"><label>Empresa</label><input type="text" id="inlineEmpresa" name="empresa" placeholder="Nombre empresa"></div>
+                                                    <div class="campo-grande"><label>Cargo</label><input type="text" id="inlineCargo" name="cargo" placeholder="Tu cargo"></div>
+                                                </div>
+                                            </div>
+                                            <div class="grupo-mini" style="display:none;"><span class="mini-datos" id="miniOcupacion"></span><span class="mini-edit" onclick="editarGrupo('grupoOcupacion')">✏️</span></div>
+                                        </div>
+
+                                        <!-- Grupo 3: Dirección -->
+                                        <div class="campo-grupo" id="grupoDireccion" style="display:none;">
+                                            <div class="grupo-header">
+                                                <span class="grupo-icono">📍</span>
+                                                <span class="grupo-titulo">Dirección</span>
+                                            </div>
+                                            <div class="grupo-campos">
+                                                <div class="campo-grande"><label>Ciudad</label><input type="text" id="inlineCiudad" name="ciudad" required placeholder="Bogotá"></div>
+                                                <div class="campo-grande"><label>Municipio</label><input type="text" id="inlineMunicipio" name="municipio" required placeholder="Suba"></div>
+                                                <div class="campo-grande"><label>Dirección</label><input type="text" id="inlineDireccion" name="direccion" required placeholder="Calle 123 # 45-67"></div>
+                                            </div>
+                                            <div class="grupo-mini" style="display:none;"><span class="mini-datos" id="miniDireccion"></span><span class="mini-edit" onclick="editarGrupo('grupoDireccion')">✏️</span></div>
+                                        </div>
+
+                                        <!-- Grupo 4: Referencias -->
+                                        <div class="campo-grupo" id="grupoReferencias" style="display:none;">
+                                            <div class="grupo-header">
+                                                <span class="grupo-icono">👥</span>
+                                                <span class="grupo-titulo">Referencias</span>
+                                            </div>
+                                            <div class="grupo-campos">
+                                                <div class="ref-titulo">Referencia 1</div>
+                                                <div class="campo-grande"><label>Nombre</label><input type="text" id="inlineRef1Nombre" name="ref1Nombre" required></div>
+                                                <div class="campo-grande"><label>Celular</label><input type="tel" id="inlineRef1Celular" name="ref1Celular" required></div>
+                                                <div class="campo-grande"><label>Parentesco</label><select id="inlineRef1Parentesco" name="ref1Parentesco" required onchange="toggleOtroParentescoInline(1)"><option value="">Selecciona</option><option value="mama">Mamá</option><option value="papa">Papá</option><option value="hermano">Hermano/a</option><option value="pareja">Pareja</option><option value="tio">Tío/a</option><option value="primo">Primo/a</option><option value="amigo">Amigo/a</option><option value="otro">Otro</option></select></div>
+                                                <div class="campo-grande" id="ref1OtroContainer" style="display:none;"><label>Especifica</label><input type="text" id="inlineRef1OtroParentesco" name="ref1OtroParentesco"></div>
+                                                <div class="ref-titulo">Referencia 2</div>
+                                                <div class="campo-grande"><label>Nombre</label><input type="text" id="inlineRef2Nombre" name="ref2Nombre" required></div>
+                                                <div class="campo-grande"><label>Celular</label><input type="tel" id="inlineRef2Celular" name="ref2Celular" required></div>
+                                                <div class="campo-grande"><label>Parentesco</label><select id="inlineRef2Parentesco" name="ref2Parentesco" required onchange="toggleOtroParentescoInline(2)"><option value="">Selecciona</option><option value="mama">Mamá</option><option value="papa">Papá</option><option value="hermano">Hermano/a</option><option value="pareja">Pareja</option><option value="tio">Tío/a</option><option value="primo">Primo/a</option><option value="amigo">Amigo/a</option><option value="otro">Otro</option></select></div>
+                                                <div class="campo-grande" id="ref2OtroContainer" style="display:none;"><label>Especifica</label><input type="text" id="inlineRef2OtroParentesco" name="ref2OtroParentesco"></div>
+                                            </div>
+                                            <div class="grupo-mini" style="display:none;"><span class="mini-datos" id="miniReferencias"></span><span class="mini-edit" onclick="editarGrupo('grupoReferencias')">✏️</span></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PASO 2: Fotos de Cédula -->
+                                    <div class="inline-step" id="inlineStep2">
+                                        <h5>Foto Frontal de Cédula</h5>
+                                        <!-- QR para móvil -->
+                                        <div id="qrCameraSection" class="qr-camera-section" style="display:none;">
+                                            <p class="photo-hint">Escanea el QR con tu celular para tomar las fotos</p>
+                                            <div id="qrCodeInline" class="qr-code-inline"></div>
+                                            <p class="qr-hint">O continúa desde este dispositivo:</p>
+                                        </div>
+                                        <p class="photo-hint">📱 Gira tu teléfono HORIZONTAL</p>
+                                        <div class="camera-inline-container">
+                                            <div class="video-wrapper-inline">
+                                                <video id="inlineCameraFront" autoplay playsinline></video>
+                                                <div class="id-guide-inline">
+                                                    <div class="corner tl"></div>
+                                                    <div class="corner tr"></div>
+                                                    <div class="corner bl"></div>
+                                                    <div class="corner br"></div>
+                                                </div>
+                                            </div>
+                                            <canvas id="inlineCanvasFront" style="display:none;"></canvas>
+                                            <div id="inlinePreviewFront" class="photo-preview-inline" style="display:none;">
+                                                <img id="inlineCapturedFront" src="" alt="Cédula Frontal">
+                                            </div>
+                                        </div>
+                                        <div class="camera-btns-inline">
+                                            <button type="button" class="btn-cam" id="inlineStartCamFront">Activar Cámara</button>
+                                            <button type="button" class="btn-cam" id="inlineCaptureFront" style="display:none;">Tomar Foto</button>
+                                            <button type="button" class="btn-cam btn-success" id="inlineConfirmFront" style="display:none;">✓ Continuar</button>
+                                            <button type="button" class="btn-cam btn-secondary" id="inlineRetakeFront" style="display:none;">Repetir</button>
+                                        </div>
+
+                                        <div id="inlineBackSection" style="display:none;">
+                                            <h5>Foto Trasera de Cédula</h5>
+                                            <div class="camera-inline-container">
+                                                <div class="video-wrapper-inline">
+                                                    <video id="inlineCameraBack" autoplay playsinline></video>
+                                                    <div class="id-guide-inline">
+                                                        <div class="corner tl"></div>
+                                                        <div class="corner tr"></div>
+                                                        <div class="corner bl"></div>
+                                                        <div class="corner br"></div>
+                                                    </div>
+                                                </div>
+                                                <canvas id="inlineCanvasBack" style="display:none;"></canvas>
+                                                <div id="inlinePreviewBack" class="photo-preview-inline" style="display:none;">
+                                                    <img id="inlineCapturedBack" src="" alt="Cédula Trasera">
+                                                </div>
+                                            </div>
+                                            <div class="camera-btns-inline">
+                                                <button type="button" class="btn-cam" id="inlineStartCamBack">Activar Cámara</button>
+                                                <button type="button" class="btn-cam" id="inlineCaptureBack" style="display:none;">Tomar Foto</button>
+                                                <button type="button" class="btn-cam btn-success" id="inlineConfirmBack" style="display:none;">✓ Continuar</button>
+                                                <button type="button" class="btn-cam btn-secondary" id="inlineRetakeBack" style="display:none;">Repetir</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PASO 3: Verificación (selfie con cédula) + Términos -->
+                                    <div class="inline-step" id="inlineStep3">
+                                        <h5>Verificación de Identidad</h5>
+                                        <p class="photo-hint">Sostén tu cédula junto a tu rostro</p>
+                                        <div class="camera-inline-container">
+                                            <div class="video-wrapper-inline video-selfie">
+                                                <video id="inlineCameraSelfie" autoplay playsinline></video>
+                                                <div class="selfie-guide-inline">
+                                                    <div class="face-outline"></div>
+                                                    <div class="id-outline"></div>
+                                                </div>
+                                            </div>
+                                            <canvas id="inlineCanvasSelfie" style="display:none;"></canvas>
+                                            <div id="inlinePreviewSelfie" class="photo-preview-inline" style="display:none;">
+                                                <img id="inlineCapturedSelfie" src="" alt="Verificación">
+                                            </div>
+                                        </div>
+                                        <div class="camera-btns-inline">
+                                            <button type="button" class="btn-cam" id="inlineStartCamSelfie">Activar Cámara</button>
+                                            <button type="button" class="btn-cam" id="inlineCaptureSelfie" style="display:none;">Tomar Foto</button>
+                                            <button type="button" class="btn-cam btn-secondary" id="inlineRetakeSelfie" style="display:none;">Repetir</button>
+                                        </div>
+                                        <div class="solicitud-terms">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" id="inlineTerms" required>
+                                                <span>Acepto los <a href="#" class="link-inline" onclick="mostrarTerminos(event)">términos y condiciones</a> y la <a href="#" class="link-inline" onclick="mostrarPrivacidad(event)">política de privacidad</a></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- PASO 4: Datos Bancarios + OTP + Contraseña -->
+                                    <div class="inline-step" id="inlineStep4">
+                                        <h5>Datos Bancarios</h5>
+                                        <div class="form-row-inline">
+                                            <div class="form-group-inline">
+                                                <label for="inlineBanco">Banco *</label>
+                                                <select id="inlineBanco" name="banco" required>
+                                                    <option value="">Selecciona</option>
+                                                    <option value="bancolombia">Bancolombia</option>
+                                                    <option value="davivienda">Davivienda</option>
+                                                    <option value="bogota">Banco de Bogotá</option>
+                                                    <option value="bbva">BBVA</option>
+                                                    <option value="nequi">Nequi</option>
+                                                    <option value="daviplata">Daviplata</option>
+                                                    <option value="otro">Otro</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group-inline">
+                                                <label for="inlineTipoCuenta">Tipo Cuenta *</label>
+                                                <select id="inlineTipoCuenta" name="tipoCuenta" required>
+                                                    <option value="">Selecciona</option>
+                                                    <option value="ahorros">Ahorros</option>
+                                                    <option value="corriente">Corriente</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group-inline full-width">
+                                            <label for="inlineNumeroCuenta">Número de Cuenta *</label>
+                                            <input type="text" id="inlineNumeroCuenta" name="numeroCuenta" required>
+                                        </div>
+
+                                        <h5>Firma Digital (OTP)</h5>
+                                        <p class="otp-declaration">Al ingresar el código OTP, declaro que he leído y acepto los términos del contrato de préstamo.</p>
+                                        <div class="otp-section">
+                                            <div class="form-group-inline full-width">
+                                                <label for="inlineOTP">Código OTP *</label>
+                                                <div class="otp-input-group">
+                                                    <input type="text" id="inlineOTP" name="otp" maxlength="6" placeholder="000000" required>
+                                                    <button type="button" class="btn-cam btn-otp" id="btnEnviarOTP" onclick="enviarOTP()">Enviar código</button>
+                                                </div>
+                                                <p class="otp-hint" id="otpHint">Se enviará un código a tu correo electrónico</p>
+                                            </div>
+                                        </div>
+
+                                        <h5>Contraseña de tu cuenta</h5>
+                                        <div class="form-row-inline">
+                                            <div class="form-group-inline">
+                                                <label for="inlinePassword">Contraseña *</label>
+                                                <input type="password" id="inlinePassword" name="password" required minlength="8">
+                                            </div>
+                                            <div class="form-group-inline">
+                                                <label for="inlinePasswordConfirm">Confirmar *</label>
+                                                <input type="password" id="inlinePasswordConfirm" name="passwordConfirm" required>
+                                            </div>
+                                        </div>
+                                        <p class="password-hint">Mínimo 8 caracteres con mayúscula, minúscula y número</p>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="solicitud-footer-inline">
+                                <button type="button" class="btn-volver" id="inlinePrevBtn" onclick="inlinePrevStep()">
+                                    <span class="material-icons icon-arrow">arrow_back</span>
+                                    Volver
+                                </button>
+                                <button type="button" class="btn-primary btn-enviar-inline" id="inlineNextBtn" onclick="inlineNextStep()">
+                                    Siguiente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios Section -->
+    <section id="beneficios" class="benefits">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir TranquiYa?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <!-- Velocímetro con aguja animada -->
+                    <div class="icon-animated icon-speedometer">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Base del velocímetro -->
+                            <path d="M32 8C18.7 8 8 18.7 8 32c0 10.5 6.7 19.4 16 22.6V52c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v2.6c9.3-3.2 16-12.1 16-22.6C56 18.7 45.3 8 32 8z" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Marcas del velocímetro -->
+                            <path d="M32 14v4M18 20l2.8 2.8M12 34h4M18 48l2.8-2.8M46 20l-2.8 2.8M52 34h-4M46 48l-2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <!-- Aguja animada -->
+                            <line class="speedometer-needle" x1="32" y1="34" x2="32" y2="18" stroke="var(--secondary-color)" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Centro -->
+                            <circle cx="32" cy="34" r="4" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Rápido</h3>
+                    <p>Respuesta en menos de 24 horas. Con TranquiYa Express, en solo 8 horas hábiles.</p>
+                </div>
+                <div class="benefit-card">
+                    <!-- Teléfono con notificación -->
+                    <div class="icon-animated icon-phone-notif">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Cuerpo del teléfono -->
+                            <rect x="18" y="8" width="28" height="48" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Pantalla -->
+                            <rect x="22" y="14" width="20" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <!-- Botón home -->
+                            <circle cx="32" cy="52" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <!-- Notificación animada -->
+                            <circle class="phone-notification" cx="44" cy="14" r="6" fill="var(--secondary-color)"/>
+                            <text class="phone-notif-text" x="44" y="17" text-anchor="middle" fill="white" font-size="8" font-weight="bold">!</text>
+                        </svg>
+                    </div>
+                    <h3>100% en línea</h3>
+                    <p>Todo el proceso desde tu celular o computadora. Sin salir de casa.</p>
+                </div>
+                <div class="benefit-card">
+                    <!-- Escudo con check -->
+                    <div class="icon-animated icon-shield">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Escudo -->
+                            <path d="M32 6L8 16v16c0 14 10.3 27 24 30 13.7-3 24-16 24-30V16L32 6z" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Check animado -->
+                            <path class="shield-check" d="M22 32l8 8 14-16" fill="none" stroke="var(--secondary-color)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Seguro</h3>
+                    <p>Vigilados por la Superintendencia de Industria y Comercio. Tus datos están protegidos.</p>
+                </div>
+                <div class="benefit-card">
+                    <!-- Persona libre -->
+                    <div class="icon-animated icon-person-free">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Persona -->
+                            <circle cx="32" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <path d="M16 56v-8c0-8.8 7.2-16 16-16s16 7.2 16 16v8" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- X tachando (animada) -->
+                            <g class="person-x">
+                                <line x1="44" y1="10" x2="56" y2="22" stroke="var(--error-color)" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="56" y1="10" x2="44" y2="22" stroke="var(--error-color)" stroke-width="4" stroke-linecap="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3>Sin fiador</h3>
+                    <p>No necesitas codeudor ni referencias. Solo tus datos personales.</p>
+                </div>
+                <div class="benefit-card">
+                    <!-- Documento con prohibido -->
+                    <div class="icon-animated icon-doc-forbidden">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Documento -->
+                            <path d="M16 8h24l12 12v36c0 2.2-1.8 4-4 4H16c-2.2 0-4-1.8-4-4V12c0-2.2 1.8-4 4-4z" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <path d="M40 8v12h12" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Líneas de texto -->
+                            <line x1="20" y1="30" x2="44" y2="30" stroke="currentColor" stroke-width="2"/>
+                            <line x1="20" y1="38" x2="40" y2="38" stroke="currentColor" stroke-width="2"/>
+                            <line x1="20" y1="46" x2="36" y2="46" stroke="currentColor" stroke-width="2"/>
+                            <!-- Símbolo prohibido animado -->
+                            <g class="doc-forbidden-sign">
+                                <circle cx="40" cy="42" r="12" fill="none" stroke="var(--error-color)" stroke-width="3"/>
+                                <line x1="32" y1="50" x2="48" y2="34" stroke="var(--error-color)" stroke-width="3"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3>Sin papeleos</h3>
+                    <p>Olvídate de documentos físicos y trámites complicados.</p>
+                </div>
+                <div class="benefit-card">
+                    <!-- Ojo con pupila animada -->
+                    <div class="icon-animated icon-eye-tracking">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Ojo exterior -->
+                            <ellipse cx="32" cy="32" rx="28" ry="18" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Iris -->
+                            <circle cx="32" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <!-- Pupila animada -->
+                            <circle class="eye-pupil" cx="32" cy="32" r="6" fill="currentColor"/>
+                            <!-- Reflejo -->
+                            <circle class="eye-reflection" cx="35" cy="29" r="2" fill="white"/>
+                        </svg>
+                    </div>
+                    <h3>Seguimiento en tiempo real</h3>
+                    <p>Ve la evolución de tu solicitud paso a paso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso Section -->
+    <section id="proceso" class="process">
+        <div class="container">
+            <h2 class="section-title">¿Cómo funciona?</h2>
+            <p class="section-subtitle">En 4 sencillos pasos obtienes tu crédito</p>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <!-- Calculadora con símbolos rotando -->
+                    <div class="icon-animated icon-calc-symbols">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Calculadora base -->
+                            <rect x="12" y="8" width="40" height="48" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Pantalla -->
+                            <rect x="18" y="14" width="28" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <!-- Botones -->
+                            <rect x="18" y="32" width="8" height="6" rx="1" fill="currentColor"/>
+                            <rect x="28" y="32" width="8" height="6" rx="1" fill="currentColor"/>
+                            <rect x="38" y="32" width="8" height="6" rx="1" fill="currentColor"/>
+                            <rect x="18" y="42" width="8" height="6" rx="1" fill="currentColor"/>
+                            <rect x="28" y="42" width="8" height="6" rx="1" fill="currentColor"/>
+                            <rect x="38" y="42" width="8" height="6" rx="1" fill="currentColor"/>
+                            <!-- Símbolo animado en pantalla -->
+                            <text class="calc-symbol" x="32" y="24" text-anchor="middle" fill="var(--secondary-color)" font-size="12" font-weight="bold">+</text>
+                        </svg>
+                    </div>
+                    <h3>Simula</h3>
+                    <p>Usa nuestra calculadora para saber cuánto pagarás</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <!-- Documento con lápiz escribiendo -->
+                    <div class="icon-animated icon-doc-write">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Documento -->
+                            <rect x="8" y="8" width="36" height="48" rx="2" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Líneas de texto que aparecen -->
+                            <line class="write-line-1" x1="14" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="2"/>
+                            <line class="write-line-2" x1="14" y1="30" x2="34" y2="30" stroke="currentColor" stroke-width="2"/>
+                            <line class="write-line-3" x1="14" y1="40" x2="30" y2="40" stroke="currentColor" stroke-width="2"/>
+                            <!-- Lápiz animado -->
+                            <g class="pencil-writing">
+                                <path d="M50 10l6 6-24 24-8 2 2-8 24-24z" fill="var(--secondary-color)" stroke="currentColor" stroke-width="2"/>
+                                <path d="M48 18l6 6" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3>Completa</h3>
+                    <p>Llena el formulario con tus datos personales</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <!-- Mano con pulgar haciendo like -->
+                    <div class="icon-animated icon-thumb-like">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Mano base -->
+                            <path d="M16 32h8v24H16z" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Pulgar animado -->
+                            <path class="thumb-finger" d="M24 32V20c0-4 2-8 8-8 2 0 4 2 4 4v12h12c2.2 0 4 1.8 4 4v4l-4 16c-.5 2-2.3 4-4 4H24" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Estrellitas de aprobación -->
+                            <g class="thumb-stars">
+                                <polygon points="10,16 12,20 16,20 13,23 14,28 10,25 6,28 7,23 4,20 8,20" fill="var(--secondary-color)"/>
+                                <polygon points="52,8 53,11 56,11 54,13 55,16 52,14 49,16 50,13 48,11 51,11" fill="var(--secondary-color)"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3>Aprueba</h3>
+                    <p>Espera la aprobación en menos de 24 horas</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <!-- Banco con monedas cayendo -->
+                    <div class="icon-animated icon-bank-money">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <!-- Techo del banco -->
+                            <path d="M8 24l24-16 24 16H8z" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Columnas -->
+                            <rect x="14" y="24" width="6" height="24" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <rect x="29" y="24" width="6" height="24" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <rect x="44" y="24" width="6" height="24" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <!-- Base -->
+                            <rect x="8" y="48" width="48" height="6" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <!-- Monedas cayendo animadas -->
+                            <g class="falling-coins">
+                                <circle class="coin-1" cx="24" cy="0" r="4" fill="var(--secondary-color)"/>
+                                <circle class="coin-2" cx="40" cy="-10" r="4" fill="#FFD700"/>
+                                <circle class="coin-3" cx="32" cy="-5" r="3" fill="var(--secondary-color)"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3>Recibe</h3>
+                    <p>El dinero llega directo a tu cuenta bancaria</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requisitos Section -->
+    <section id="requisitos" class="requirements">
+        <div class="container">
+            <h2 class="section-title">Requisitos</h2>
+            <div class="requirements-content">
+                <div class="requirements-list">
+                    <div class="requirement-item">
+                        <span class="material-icons icon-badge">badge</span>
+                        <div>
+                            <h4>Ser mayor de edad</h4>
+                            <p>Debes tener 18 años o más</p>
+                        </div>
+                    </div>
+                    <div class="requirement-item">
+                        <span class="material-icons icon-bank">account_balance</span>
+                        <div>
+                            <h4>Cuenta bancaria propia</h4>
+                            <p>Cuenta de ahorros o corriente a tu nombre</p>
+                        </div>
+                    </div>
+                    <div class="requirement-item">
+                        <span class="material-icons icon-smartphone">smartphone</span>
+                        <div>
+                            <h4>Celular o correo electrónico</h4>
+                            <p>Para mantenerte informado del proceso</p>
+                        </div>
+                    </div>
+                    <div class="requirement-item">
+                        <span class="material-icons icon-card">credit_card</span>
+                        <div>
+                            <h4>Documento de identidad</h4>
+                            <p>Cédula de ciudadanía vigente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Solicitud (OCULTO - ahora está inline en la calculadora) -->
+    <section id="solicitud" class="application-form" style="display: none;">
+        <div class="container">
+            <div class="form-container">
+                <h2 class="section-title">Solicita tu crédito ahora</h2>
+                <p class="section-subtitle">Completa el formulario y obtén tu dinero en 24 horas</p>
+
+                <!-- Progress Indicator -->
+                <div class="form-progress">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Datos Personales</div>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Referencias</div>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Documento</div>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Verificación</div>
+                    </div>
+                </div>
+
+                <form id="creditForm" class="credit-form">
+                    <!-- PASO 1: Datos Personales -->
+                    <div class="form-step active" id="step1">
+                        <h3>Datos Personales y Bancarios</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombres">Nombres *</label>
+                                <input type="text" id="nombres" name="nombres" required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidos">Apellidos *</label>
+                                <input type="text" id="apellidos" name="apellidos" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cedula">Cédula de Ciudadanía *</label>
+                                <input type="text" id="cedula" name="cedula" required pattern="[0-9]{6,10}">
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="celular">Celular *</label>
+                                <input type="tel" id="celular" name="celular" required pattern="[0-9]{10}">
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico *</label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ocupacion">Ocupación *</label>
+                            <select id="ocupacion" name="ocupacion" required>
+                                <option value="">Selecciona tu ocupación</option>
+                                <option value="empleado">Empleado</option>
+                                <option value="independiente">Independiente</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                        <div class="form-row" id="empleadoFields" style="display: none;">
+                            <div class="form-group">
+                                <label for="cargo">Cargo</label>
+                                <input type="text" id="cargo" name="cargo">
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="empresa">Empresa</label>
+                                <input type="text" id="empresa" name="empresa">
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <h4>Dirección de Residencia</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ciudad">Ciudad *</label>
+                                <input type="text" id="ciudad" name="ciudad" required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="municipio">Municipio *</label>
+                                <input type="text" id="municipio" name="municipio" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección Completa *</label>
+                            <input type="text" id="direccion" name="direccion" required>
+                            <span class="error-message"></span>
+                        </div>
+                        <h4>Datos Bancarios</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="banco">Banco *</label>
+                                <select id="banco" name="banco" required>
+                                    <option value="">Selecciona tu banco</option>
+                                    <option value="bancolombia">Bancolombia</option>
+                                    <option value="davivienda">Davivienda</option>
+                                    <option value="bogota">Banco de Bogotá</option>
+                                    <option value="bbva">BBVA</option>
+                                    <option value="nequi">Nequi</option>
+                                    <option value="daviplata">Daviplata</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="numeroCuenta">Número de Cuenta *</label>
+                                <input type="text" id="numeroCuenta" name="numeroCuenta" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoCuenta">Tipo de Cuenta *</label>
+                            <select id="tipoCuenta" name="tipoCuenta" required>
+                                <option value="">Selecciona el tipo de cuenta</option>
+                                <option value="ahorros">Ahorros</option>
+                                <option value="corriente">Corriente</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                        <h4>Seguridad de la Cuenta</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="password">Contraseña *</label>
+                                <input type="password" id="password" name="password" required minlength="8"
+                                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+                                       title="Mínimo 8 caracteres, debe incluir mayúscula, minúscula y número">
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordConfirm">Confirmar Contraseña *</label>
+                                <input type="password" id="passwordConfirm" name="passwordConfirm" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-summary">
+                            <h4>Resumen de tu crédito</h4>
+                            <div class="summary-item">
+                                <span>Monto solicitado:</span>
+                                <span id="summaryAmount">$500.000</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Total a pagar:</span>
+                                <span id="summaryTotal">$600.000</span>
+                            </div>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="btn-primary" id="nextStep1">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 2: Referencias Personales -->
+                    <div class="form-step" id="step2">
+                        <h3>Referencias Personales</h3>
+                        <p class="step-description">Por favor proporciona dos referencias personales</p>
+
+                        <h4>Referencia Personal #1</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ref1Nombres">Nombres Completos *</label>
+                                <input type="text" id="ref1Nombres" name="ref1Nombres" required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ref1Celular">Número de Contacto *</label>
+                                <input type="tel" id="ref1Celular" name="ref1Celular" pattern="[0-9]{10}" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ref1Parentesco">Parentesco *</label>
+                            <select id="ref1Parentesco" name="ref1Parentesco" required>
+                                <option value="">Selecciona el parentesco</option>
+                                <option value="mama">Mamá</option>
+                                <option value="papa">Papá</option>
+                                <option value="hermano">Hermano</option>
+                                <option value="hermana">Hermana</option>
+                                <option value="hijo">Hijo</option>
+                                <option value="hija">Hija</option>
+                                <option value="abuelo">Abuelo</option>
+                                <option value="abuela">Abuela</option>
+                                <option value="tio">Tío</option>
+                                <option value="tia">Tía</option>
+                                <option value="primo">Primo</option>
+                                <option value="prima">Prima</option>
+                                <option value="amigo">Amigo</option>
+                                <option value="amiga">Amiga</option>
+                                <option value="otro">Otro allegado</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                        <div class="form-group" id="ref1OtroContainer" style="display: none;">
+                            <label for="ref1OtroParentesco">Especifica el tipo de allegado *</label>
+                            <input type="text" id="ref1OtroParentesco" name="ref1OtroParentesco" placeholder="Ej: Primo, Sobrino, Cuñado, etc.">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <h4>Referencia Personal #2</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ref2Nombres">Nombres Completos *</label>
+                                <input type="text" id="ref2Nombres" name="ref2Nombres" required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ref2Celular">Número de Contacto *</label>
+                                <input type="tel" id="ref2Celular" name="ref2Celular" pattern="[0-9]{10}" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ref2Parentesco">Parentesco *</label>
+                            <select id="ref2Parentesco" name="ref2Parentesco" required>
+                                <option value="">Selecciona el parentesco</option>
+                                <option value="mama">Mamá</option>
+                                <option value="papa">Papá</option>
+                                <option value="hermano">Hermano</option>
+                                <option value="hermana">Hermana</option>
+                                <option value="hijo">Hijo</option>
+                                <option value="hija">Hija</option>
+                                <option value="abuelo">Abuelo</option>
+                                <option value="abuela">Abuela</option>
+                                <option value="tio">Tío</option>
+                                <option value="tia">Tía</option>
+                                <option value="primo">Primo</option>
+                                <option value="prima">Prima</option>
+                                <option value="amigo">Amigo</option>
+                                <option value="amiga">Amiga</option>
+                                <option value="otro">Otro allegado</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                        <div class="form-group" id="ref2OtroContainer" style="display: none;">
+                            <label for="ref2OtroParentesco">Especifica el tipo de allegado *</label>
+                            <input type="text" id="ref2OtroParentesco" name="ref2OtroParentesco" placeholder="Ej: Primo, Sobrino, Cuñado, etc.">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn-secondary" id="prevStep2">Anterior</button>
+                            <button type="button" class="btn-primary" id="nextStep2">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 3: Fotos del Documento -->
+                    <div class="form-step" id="step3">
+                        <h3>Documento de Identidad</h3>
+                        <p class="step-description">Toma fotos de ambos lados de tu cédula de ciudadanía</p>
+
+                        <!-- Foto Frontal de Cédula -->
+                        <div class="id-photo-section">
+                            <h4>Foto Frontal de la Cédula</h4>
+                            <p class="photo-instruction"><strong>🔄 IMPORTANTE: Gira tu teléfono HORIZONTAL (landscape)</strong></p>
+                            <p class="photo-instruction">Coloca tu cédula dentro del recuadro</p>
+
+                            <div class="camera-container">
+                                <div class="video-wrapper">
+                                    <video id="cameraFront" autoplay playsinline allow="camera"></video>
+                                    <div class="id-guide-frame">
+                                        <div class="corner top-left"></div>
+                                        <div class="corner top-right"></div>
+                                        <div class="corner bottom-left"></div>
+                                        <div class="corner bottom-right"></div>
+                                    </div>
+                                </div>
+                                <canvas id="canvasFront" style="display: none;"></canvas>
+                                <div id="photoPreviewFront" class="photo-preview" style="display: none;">
+                                    <img id="capturedPhotoFront" src="" alt="Cédula Frontal">
+                                </div>
+                            </div>
+
+                            <div class="qr-container">
+                                <h5>O escanea para tomar AMBAS fotos en tu celular</h5>
+                                <div id="qrCodeFront" class="qr-code"></div>
+                                <p class="qr-status" id="qrStatusFront">Generando código QR...</p>
+                                <p style="text-align: center; color: #666; font-size: 13px; margin-top: 8px;">
+                                    ⚡ Escanea una vez y toma ambas fotos seguidas
+                                </p>
+                            </div>
+
+                            <div class="camera-controls">
+                                <button type="button" class="btn-primary" id="startCameraFront">Activar Cámara</button>
+                                <button type="button" class="btn-primary" id="capturePhotoFront" style="display: none;">Tomar Foto</button>
+                                <button type="button" class="btn-success" id="confirmPhotoFront" style="display: none;">✓ Está Bien, Continuar</button>
+                                <button type="button" class="btn-secondary" id="retakePhotoFront" style="display: none;">Tomar Otra</button>
+                            </div>
+                        </div>
+
+                        <!-- Foto Trasera de Cédula -->
+                        <div class="id-photo-section" id="backPhotoSection" style="display: none;">
+                            <h4>Foto Trasera de la Cédula</h4>
+                            <p class="photo-instruction"><strong>🔄 IMPORTANTE: Mantén tu teléfono HORIZONTAL (landscape)</strong></p>
+                            <p class="photo-instruction">Coloca el reverso de tu cédula dentro del recuadro</p>
+
+                            <div class="camera-container">
+                                <div class="video-wrapper">
+                                    <video id="cameraBack" autoplay playsinline allow="camera"></video>
+                                    <div class="id-guide-frame">
+                                        <div class="corner top-left"></div>
+                                        <div class="corner top-right"></div>
+                                        <div class="corner bottom-left"></div>
+                                        <div class="corner bottom-right"></div>
+                                    </div>
+                                </div>
+                                <canvas id="canvasBack" style="display: none;"></canvas>
+                                <div id="photoPreviewBack" class="photo-preview" style="display: none;">
+                                    <img id="capturedPhotoBack" src="" alt="Cédula Trasera">
+                                </div>
+                            </div>
+
+                            <div class="qr-container" style="display: none;">
+                                <p class="qr-status" id="qrStatusBack" style="text-align: center; color: #666; font-size: 14px;">Si usaste el QR, ambas fotos se tomaron desde el celular</p>
+                            </div>
+
+                            <div class="camera-controls">
+                                <button type="button" class="btn-primary" id="startCameraBack">Activar Cámara</button>
+                                <button type="button" class="btn-primary" id="capturePhotoBack" style="display: none;">Tomar Foto</button>
+                                <button type="button" class="btn-success" id="confirmPhotoBack" style="display: none;">✓ Está Bien, Continuar</button>
+                                <button type="button" class="btn-secondary" id="retakePhotoBack" style="display: none;">Tomar Otra</button>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn-secondary" id="prevStep3">Anterior</button>
+                            <button type="button" class="btn-primary" id="nextStep3">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 4: Verificación de Identidad -->
+                    <div class="form-step" id="step4">
+                        <h3>Verificación de Identidad</h3>
+                        <p class="step-description">Toma una foto sosteniendo tu documento de identidad a la altura de tu rostro</p>
+
+                        <div class="photo-capture-section">
+                            <div class="camera-container">
+                                <video id="camera" autoplay playsinline allow="camera; microphone"></video>
+                                <canvas id="canvas" style="display: none;"></canvas>
+
+                                <!-- Guías visuales para foto de verificación (estilo silueta) -->
+                                <div class="verification-guide-frame" id="verificationGuide" style="display: none;">
+                                    <!-- Silueta de persona con cédula -->
+                                    <div class="person-silhouette">
+                                        <!-- Cabeza/rostro -->
+                                        <div class="head-outline">
+                                            <div class="head-shape"></div>
+                                        </div>
+                                        <!-- Hombros -->
+                                        <div class="shoulders-outline"></div>
+                                        <!-- Mano con cédula -->
+                                        <div class="hand-id-outline">
+                                            <div class="id-card-outline">
+                                                <span class="guide-hint">Sostén tu cédula aquí</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="photoPreview" class="photo-preview" style="display: none;">
+                                    <img id="capturedPhoto" src="" alt="Foto capturada">
+                                </div>
+                            </div>
+
+                            <div class="qr-container">
+                                <h5>O escanea para tomar foto en tu celular</h5>
+                                <div id="qrCode" class="qr-code"></div>
+                                <p class="qr-status" id="qrStatus">Generando código QR...</p>
+                            </div>
+                        </div>
+
+                        <div class="camera-controls">
+                            <button type="button" class="btn-primary" id="startCamera">Activar Cámara</button>
+                            <button type="button" class="btn-primary" id="capturePhoto" style="display: none;">Tomar Foto</button>
+                            <button type="button" class="btn-secondary" id="retakePhoto" style="display: none;">Tomar Otra Foto</button>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="termsCheckbox">
+                                <span class="checkmark"></span>
+                                <span>Acepto los <a href="#" class="link">términos y condiciones</a> y la <a href="#" class="link">política de privacidad</a></span>
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn-secondary" id="prevStep4">Anterior</button>
+                            <button type="button" class="btn-primary btn-submit" id="submitButton" onclick="submitForm()">Enviar Solicitud</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <h2 class="section-title">¿Tienes preguntas?</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="material-icons icon-email">email</span>
+                    <h3>Email</h3>
+                    <p>Escríbenos a</p>
+                    <a href="mailto:contacto@tranquiya.com">contacto@tranquiya.com</a>
+                </div>
+                <div class="contact-card">
+                    <span class="material-icons icon-schedule">schedule</span>
+                    <h3>Horario</h3>
+                    <p>Lunes a Viernes</p>
+                    <p>8:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TranquiYa</h3>
+                    <p>Créditos en línea seguros y confiables. Vigilados por la Superintendencia de Industria y Comercio.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="#beneficios">Beneficios</a></li>
+                        <li><a href="#proceso">Proceso</a></li>
+                        <li><a href="#requisitos">Requisitos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Términos y condiciones</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Tratamiento de datos</a></li>
+                        <li><a href="#">Preguntas frecuentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">Facebook</a>
+                        <a href="https://www.instagram.com/tranquiya/" target="_blank" aria-label="Instagram">Instagram</a>
+                        <a href="https://www.tiktok.com/@tranquiya" target="_blank" aria-label="TikTok">TikTok</a>
+                        <a href="https://x.com/tranquiyacol" target="_blank" aria-label="Twitter">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TranquiYa - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <div class="modal-icon">
+                <span class="material-icons icon-account">account_circle</span>
+            </div>
+            <h3>Iniciar Sesión</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="ejemplo@correo.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+                </div>
+                <div id="loginError" class="error-message" style="display: none;"></div>
+                <button type="submit" class="btn-primary">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-icon">
+                <span class="material-icons icon-check">check_circle</span>
+            </div>
+            <h3>¡Solicitud enviada exitosamente!</h3>
+            <p>Hemos recibido tu solicitud de crédito. Te contactaremos en las próximas 24 horas.</p>
+            <p class="tracking-info">Podrás hacer seguimiento a tu solicitud desde tu correo electrónico.</p>
+            <button class="btn-primary" onclick="closeModal()">Entendido</button>
+        </div>
+    </div>
+
+    <!-- QR Code Library - Local -->
+    <script src="qrcode.min.js"></script>
+
+    <script src="api-config.js?v=202601191648"></script>
+    <script src="script.js?v=202601301025"></script>
+</body>
+</html>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      "name": "TranquiYa",
+      "description": "TranquiYa — Créditos en línea rápidos y seguros. Préstamos de $100.000 a $2.000.000, incluso para reportados. Respuesta rápida, sin papeleo y con pocos requisitos.",
+      "url": "https://tranquiya.com",
+      "logo": "https://tranquiya.com/img/logo.png",
+      "image": "https://tranquiya.com/img/logo.png",
+      "telephone": "+57-XXX-XXXXXXX",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CO"
+      },
+      "priceRange": "$100.000 - $2.000.000",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "120"
+      }
+    }
+    </script>

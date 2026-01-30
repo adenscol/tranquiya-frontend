@@ -1,4 +1,4 @@
-// v2026013003 - OTP enviado por Resend directo, sin mostrar código en pantalla
+// v2026013004 - OTP via backend + grupos siempre visibles
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -457,97 +457,79 @@ function toggleOtroParentescoInline(refNum) {
 // ============================================
 
 /**
- * Activa un grupo y desactiva los demás
+ * Toggle un grupo específico (expandir/colapsar)
+ */
+function toggleGrupo(grupoId) {
+    const grupo = document.getElementById(grupoId);
+    if (!grupo) return;
+
+    const campos = grupo.querySelector('.grupo-campos');
+
+    if (grupo.classList.contains('active')) {
+        // Colapsar
+        grupo.classList.remove('active');
+        if (campos) campos.style.display = 'none';
+    } else {
+        // Expandir
+        grupo.classList.add('active');
+        if (campos) campos.style.display = 'grid';
+    }
+}
+
+/**
+ * Activa un grupo (expande) - mantiene los demás como están
  */
 function activarGrupo(grupoId) {
-    const grupos = document.querySelectorAll('.campo-grupo');
+    const grupo = document.getElementById(grupoId);
+    if (!grupo) return;
 
-    grupos.forEach(grupo => {
-        if (grupo.id === grupoId) {
-            grupo.classList.add('active');
-            // Mostrar campos
-            const campos = grupo.querySelector('.grupo-campos');
-            if (campos) campos.style.display = 'grid';
-            // Ocultar mini
-            const mini = grupo.querySelector('.grupo-mini');
-            if (mini) mini.style.display = 'none';
-        } else if (grupo.classList.contains('completed')) {
-            // Mantener colapsado si está completado
-            grupo.classList.remove('active');
-            const campos = grupo.querySelector('.grupo-campos');
-            if (campos) campos.style.display = 'none';
-            const mini = grupo.querySelector('.grupo-mini');
-            if (mini) mini.style.display = 'flex';
-        } else {
-            grupo.classList.remove('active');
-        }
-    });
+    grupo.classList.add('active');
+    const campos = grupo.querySelector('.grupo-campos');
+    if (campos) campos.style.display = 'grid';
 }
 
 /**
  * Edita un grupo (lo reactiva para edición)
  */
 function editarGrupo(grupoId) {
-    const grupo = document.getElementById(grupoId);
-    if (!grupo) return;
-
-    // Remover estado completado temporalmente
-    grupo.classList.remove('completed');
-
-    // Activar el grupo para edición
     activarGrupo(grupoId);
 }
 
 /**
- * Verifica si un grupo está completo (solo actualiza estado visual, NO auto-avanza)
- * El auto-avance está DESHABILITADO - el usuario controla cuando avanzar
+ * Verifica si un grupo está completo - NO USADO
  */
 function verificarGrupoCompleto(grupoId) {
-    // NO HACER NADA - dejamos que el usuario controle cuando avanzar
-    // Esta función se mantiene por compatibilidad pero no auto-cierra paneles
     return false;
 }
 
 /**
- * DESHABILITADO - El usuario avanza manualmente con el botón "Siguiente"
+ * DESHABILITADO - El usuario avanza manualmente
  */
 function avanzarSiguienteGrupo(grupoActualId) {
-    // NO AUTO-AVANZAR - el usuario decide cuando avanzar
     return;
 }
 
 /**
  * Inicializa los listeners para los grupos de campos
- * NOTA: Los grupos permanecen abiertos, no se cierran automáticamente
+ * TODOS los grupos permanecen SIEMPRE visibles y expandidos
  */
 function initGruposCampos() {
     const grupos = document.querySelectorAll('.campo-grupo');
 
     grupos.forEach(grupo => {
-        // Listener para el header del grupo (solo para expandir/colapsar manualmente)
+        // Asegurar que todos los grupos estén visibles y expandidos al inicio
+        grupo.classList.add('active');
+        const campos = grupo.querySelector('.grupo-campos');
+        if (campos) campos.style.display = 'grid';
+
+        // Click en el header solo hace toggle de ese grupo
         const header = grupo.querySelector('.grupo-header');
         if (header) {
             header.addEventListener('click', (e) => {
                 e.stopPropagation();
-                // Toggle: si está activo lo colapsa, si no lo activa
-                if (grupo.classList.contains('active')) {
-                    grupo.classList.remove('active');
-                } else {
-                    activarGrupo(grupo.id);
-                }
+                toggleGrupo(grupo.id);
             });
         }
-
-        // Listeners para los campos dentro del grupo
-        const campos = grupo.querySelectorAll('input, select');
-        campos.forEach(campo => {
-            campo.addEventListener('input', () => {
-                verificarGrupoCompleto(grupo.id);
-            });
-            campo.addEventListener('change', () => {
-                verificarGrupoCompleto(grupo.id);
-            });
-        });
     });
 }
 
@@ -737,10 +719,11 @@ function validateInlineStep(step) {
 let otpVerificado = false;
 
 /**
- * Envía el código OTP al correo del usuario usando Resend
+ * Envía el código OTP al correo del usuario a través del backend
  */
 async function enviarOTP() {
     const email = document.getElementById('inlineEmail').value.trim();
+    const cedula = document.getElementById('inlineCedula').value.trim();
     const btnEnviar = document.getElementById('btnEnviarOTP');
     const otpHint = document.getElementById('otpHint');
 
@@ -749,65 +732,24 @@ async function enviarOTP() {
         return;
     }
 
+    if (!cedula) {
+        alert('No se encontró la cédula. Verifica el paso 1.');
+        return;
+    }
+
     btnEnviar.disabled = true;
     btnEnviar.textContent = 'Enviando...';
 
-    // Generar código OTP de 6 dígitos
-    const codigoOTP = Math.floor(100000 + Math.random() * 900000).toString();
-
     try {
-        // Enviar correo usando Resend API directamente
-        const response = await fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer re_J4C7Kyrb_2MaD5HzCvRF1w9GiqxEuCHz6',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                from: 'TranquiYa <onboarding@resend.dev>',
-                to: [email],
-                subject: `${codigoOTP} - Tu código de verificación TranquiYa`,
-                html: `
-<!DOCTYPE html>
-<html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-    <div style="background: linear-gradient(135deg, #003087 0%, #00A651 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-        <h1 style="color: white; margin: 0; font-size: 28px;">TranquiYa</h1>
-        <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 14px;">Firma Digital - Código de Verificación</p>
-    </div>
-    <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
-        <h2 style="color: #333; margin-top: 0;">Tu código de verificación</h2>
-        <p>Usa el siguiente código para completar tu solicitud de préstamo:</p>
-        <div style="background: #003087; padding: 25px; text-align: center; margin: 25px 0; border-radius: 10px;">
-            <span style="color: white; font-size: 36px; font-weight: bold; letter-spacing: 8px;">${codigoOTP}</span>
-        </div>
-        <div style="background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; border-radius: 5px;">
-            <p style="margin: 0; color: #856404;"><strong>⚠️ Importante:</strong></p>
-            <ul style="margin: 10px 0 0 0; padding-left: 20px; color: #856404;">
-                <li>Este código expira en <strong>10 minutos</strong></li>
-                <li>No compartas este código con nadie</li>
-                <li>Al ingresar este código, aceptas los términos del contrato de préstamo</li>
-            </ul>
-        </div>
-        <p style="color: #666; font-size: 14px;">Si no solicitaste este código, ignora este mensaje.</p>
-    </div>
-    <div style="text-align: center; padding: 20px; color: #999; font-size: 12px;">
-        <p>© ${new Date().getFullYear()} TranquiYa - Todos los derechos reservados</p>
-    </div>
-</body>
-</html>`
-            })
+        // Enviar OTP a través del backend (que tiene Resend configurado)
+        const response = await ApiClient.post('/auth/send-otp', {
+            email: email,
+            cedula: cedula,
+            userAgent: navigator.userAgent
         });
 
-        const result = await response.json();
-
-        if (response.ok && result.id) {
-            // Éxito - guardar código para verificación local
+        if (response.success) {
             otpEnviado = true;
-            otpCodigo = codigoOTP;
-            otpExpiracion = Date.now() + (10 * 60 * 1000); // 10 minutos
-
             otpHint.textContent = 'Código enviado a tu correo. Revisa tu bandeja de entrada.';
             otpHint.className = 'otp-hint success';
             btnEnviar.textContent = 'Reenviar código';
@@ -819,11 +761,20 @@ async function enviarOTP() {
             const otpInput = document.getElementById('inlineOTP');
             otpInput.addEventListener('input', verificarOTPAutomatico);
         } else {
-            throw new Error(result.message || 'Error al enviar el correo');
+            throw new Error(response.error || 'Error al enviar OTP');
         }
     } catch (error) {
         console.error('Error enviando OTP:', error);
-        otpHint.textContent = 'Error al enviar el código. Intenta de nuevo.';
+
+        // Mostrar mensaje de error más específico
+        let errorMsg = 'Error al enviar el código. ';
+        if (error.message) {
+            errorMsg += error.message;
+        } else {
+            errorMsg += 'Intenta de nuevo.';
+        }
+
+        otpHint.textContent = errorMsg;
         otpHint.className = 'otp-hint error';
         btnEnviar.textContent = 'Reintentar';
         btnEnviar.disabled = false;
@@ -839,24 +790,9 @@ async function verificarOTPAutomatico() {
     const codigo = otpInput.value.trim();
 
     if (codigo.length === 6) {
-        // Si tenemos un código local (modo desarrollo), verificar localmente
-        if (otpCodigo) {
-            if (codigo === otpCodigo) {
-                otpVerificado = true;
-                otpInput.style.borderColor = 'var(--success-color)';
-                otpHint.textContent = '✓ Código verificado correctamente';
-                otpHint.className = 'otp-hint success';
-                otpInput.disabled = true;
-                console.log('OTP verificado localmente (modo desarrollo)');
-            } else {
-                otpInput.style.borderColor = 'var(--error-color)';
-                otpHint.textContent = 'Código incorrecto. Verifica e intenta de nuevo.';
-                otpHint.className = 'otp-hint error';
-            }
-            return;
-        }
+        otpHint.textContent = 'Verificando código...';
+        otpHint.className = 'otp-hint';
 
-        // Modo producción: verificar con el servidor
         try {
             const response = await ApiClient.post('/auth/verify-otp', {
                 email: document.getElementById('inlineEmail').value.trim(),
@@ -870,6 +806,7 @@ async function verificarOTPAutomatico() {
                 otpHint.textContent = '✓ Código verificado correctamente';
                 otpHint.className = 'otp-hint success';
                 otpInput.disabled = true;
+                console.log('OTP verificado con el servidor');
             } else {
                 otpInput.style.borderColor = 'var(--error-color)';
                 otpHint.textContent = 'Código incorrecto. Verifica e intenta de nuevo.';
@@ -877,17 +814,9 @@ async function verificarOTPAutomatico() {
             }
         } catch (error) {
             console.error('Error verificando OTP:', error);
-
-            // Si el servidor no tiene la ruta, aceptar cualquier código de 6 dígitos en desarrollo
-            if (error.message && (error.message.includes('Ruta no encontrada') || error.status === 404)) {
-                otpVerificado = true;
-                otpInput.style.borderColor = 'var(--success-color)';
-                otpHint.textContent = '✓ Código aceptado (modo desarrollo)';
-                otpHint.className = 'otp-hint success';
-                otpInput.disabled = true;
-            } else {
-                otpHint.textContent = 'Error al verificar. Intenta de nuevo.';
-                otpHint.className = 'otp-hint error';
+            otpInput.style.borderColor = 'var(--error-color)';
+            otpHint.textContent = error.message || 'Error al verificar. Intenta de nuevo.';
+            otpHint.className = 'otp-hint error';
             }
         }
     }

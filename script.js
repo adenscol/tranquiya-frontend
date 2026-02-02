@@ -1,4 +1,4 @@
-// v2026020210 - Añadido polling para recibir selfie desde móvil
+// v2026020211 - Debug mejorado para polling de selfie
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -475,9 +475,15 @@ function startSelfiePhotoCheck() {
  */
 async function checkSelfiePhoto() {
     try {
+        console.log('🔍 Verificando selfie... SessionId:', selfieSessionId, 'Ya tiene foto:', !!inlinePhotoSelfie);
+
         if (selfieSessionId && !inlinePhotoSelfie) {
-            const response = await fetch(`${API_CONFIG.BASE_URL}/api/photo-sync/check/${selfieSessionId}`);
+            const url = `${API_CONFIG.BASE_URL}/api/photo-sync/check/${selfieSessionId}`;
+            console.log('🔍 Consultando:', url);
+
+            const response = await fetch(url);
             const data = await response.json();
+            console.log('🔍 Respuesta:', data.success, 'hasPhoto:', data.hasPhoto);
 
             if (data.success && data.hasPhoto) {
                 console.log('✅ Selfie recibida desde móvil');
@@ -487,11 +493,28 @@ async function checkSelfiePhoto() {
                 // Mostrar en preview
                 const previewEl = document.getElementById('inlinePreviewSelfie');
                 const capturedEl = document.getElementById('inlineCapturedSelfie');
-                const videoWrapper = document.querySelector('#inlineStep3 .video-wrapper-inline');
+                const videoWrapper = document.querySelector('#inlineStep3 .video-wrapper-inline.video-selfie');
+                const cameraContainer = document.querySelector('#inlineStep3 .camera-inline-container');
 
-                if (capturedEl) capturedEl.src = data.photoData;
-                if (previewEl) previewEl.style.display = 'block';
-                if (videoWrapper) videoWrapper.style.display = 'none';
+                console.log('📷 Elementos encontrados:', {
+                    previewEl: !!previewEl,
+                    capturedEl: !!capturedEl,
+                    videoWrapper: !!videoWrapper,
+                    cameraContainer: !!cameraContainer
+                });
+
+                if (capturedEl) {
+                    capturedEl.src = data.photoData;
+                    console.log('✅ Imagen src seteada');
+                }
+                if (previewEl) {
+                    previewEl.style.display = 'block';
+                    console.log('✅ Preview visible');
+                }
+                if (videoWrapper) {
+                    videoWrapper.style.display = 'none';
+                    console.log('✅ Video oculto');
+                }
 
                 // Ocultar botones de cámara
                 const startCamSelfie = document.getElementById('inlineStartCamSelfie');
@@ -503,10 +526,11 @@ async function checkSelfiePhoto() {
                 stopSelfiePhotoCheck();
 
                 console.log('✅ Selfie confirmada automáticamente desde móvil');
+                console.log('✅ inlinePhotoSelfie tiene datos:', !!inlinePhotoSelfie);
             }
         }
     } catch (error) {
-        console.error('Error verificando selfie:', error);
+        console.error('❌ Error verificando selfie:', error);
     }
 }
 

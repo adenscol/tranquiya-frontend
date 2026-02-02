@@ -1,4 +1,4 @@
-// v2026020202 - Fix QR selfie, redirección a cliente-portal.html
+// v2026020203 - Firma digital completa con todos los datos requeridos
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -847,6 +847,7 @@ async function enviarOTP() {
 
 /**
  * Verifica el OTP automáticamente cuando tiene 6 dígitos
+ * Envía todos los datos necesarios para la firma digital
  */
 async function verificarOTPAutomatico() {
     const otpInput = document.getElementById('inlineOTP');
@@ -858,19 +859,52 @@ async function verificarOTPAutomatico() {
         otpHint.className = 'otp-hint';
 
         try {
+            // Recopilar todos los datos para la firma digital
+            const datosFirma = {
+                // Datos del usuario
+                nombres: document.getElementById('inlineNombres')?.value?.trim() || '',
+                apellidos: document.getElementById('inlineApellidos')?.value?.trim() || '',
+                nombreCompleto: `${document.getElementById('inlineNombres')?.value?.trim() || ''} ${document.getElementById('inlineApellidos')?.value?.trim() || ''}`.trim(),
+                cedula: document.getElementById('inlineCedula')?.value?.trim() || '',
+                celular: document.getElementById('inlineCelular')?.value?.trim() || '',
+                telefono: document.getElementById('inlineCelular')?.value?.trim() || '',
+
+                // Zona horaria del usuario
+                zonaHoraria: Intl.DateTimeFormat().resolvedOptions().timeZone,
+
+                // Texto exacto aceptado
+                textoAceptado: 'Declaro que he leído y acepto los términos y condiciones del préstamo, la política de privacidad y autorizo el tratamiento de mis datos personales. Confirmo que la información proporcionada es verídica y acepto las condiciones del crédito mediante la verificación de este código OTP.',
+
+                // Versión del contrato
+                versionContrato: 'v1.0-2026',
+
+                // Datos del préstamo
+                montoSolicitado: currentAmount || null,
+                frecuenciaPago: currentFrequency || null,
+                numeroCuotas: currentInstallments || null,
+
+                // Verificaciones realizadas
+                selfieVerificada: !!capturedSelfieData || !!document.getElementById('inlineCapturedSelfie')?.src,
+                selfieUrl: capturedSelfieData || document.getElementById('inlineCapturedSelfie')?.src || null,
+                documentoCapturado: !!(capturedIDFrontData && capturedIDBackData),
+                documentoFrenteUrl: capturedIDFrontData || document.getElementById('inlineCapturedFront')?.src || null,
+                documentoReversoUrl: capturedIDBackData || document.getElementById('inlineCapturedBack')?.src || null
+            };
+
             const response = await ApiClient.post('/auth/verify-otp', {
                 email: document.getElementById('inlineEmail').value.trim(),
                 otp: codigo,
-                userAgent: navigator.userAgent
+                userAgent: navigator.userAgent,
+                datosFirma: datosFirma
             });
 
             if (response.valid) {
                 otpVerificado = true;
                 otpInput.style.borderColor = 'var(--success-color)';
-                otpHint.textContent = '✓ Código verificado correctamente';
+                otpHint.textContent = '✓ Código verificado - Firma digital registrada';
                 otpHint.className = 'otp-hint success';
                 otpInput.disabled = true;
-                console.log('OTP verificado con el servidor');
+                console.log('OTP verificado y firma digital guardada. ID:', response.otpAuditId);
             } else {
                 otpInput.style.borderColor = 'var(--error-color)';
                 otpHint.textContent = 'Código incorrecto. Verifica e intenta de nuevo.';

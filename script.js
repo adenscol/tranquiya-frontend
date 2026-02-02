@@ -1,4 +1,4 @@
-// v2026013005 - Fix solicitud view + debug logs
+// v2026013006 - Fix syntax error en verificarOTPAutomatico
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -829,7 +829,6 @@ async function verificarOTPAutomatico() {
             otpInput.style.borderColor = 'var(--error-color)';
             otpHint.textContent = error.message || 'Error al verificar. Intenta de nuevo.';
             otpHint.className = 'otp-hint error';
-            }
         }
     }
 }

@@ -1,4 +1,4 @@
-// v2026013004 - OTP via backend + grupos siempre visibles
+// v2026013005 - Fix solicitud view + debug logs
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -49,6 +49,7 @@ const MAX_INSTALLMENTS = 6;               // Máximo 6 cuotas para todas las per
  * Muestra el formulario de solicitud inline dentro de la calculadora
  */
 function scrollToForm() {
+    console.log('scrollToForm llamado');
     mostrarSolicitudInline();
 }
 
@@ -56,13 +57,19 @@ function scrollToForm() {
  * Muestra la vista de solicitud inline en la calculadora
  */
 function mostrarSolicitudInline() {
+    console.log('mostrarSolicitudInline ejecutándose...');
+
     const calculatorView = document.getElementById('calculatorView');
     const planPagosView = document.getElementById('planPagosView');
     const solicitudView = document.getElementById('solicitudView');
     const calculatorCard = document.querySelector('.calculator-card');
 
+    console.log('calculatorView:', calculatorView);
+    console.log('solicitudView:', solicitudView);
+
     if (!calculatorView || !solicitudView) {
         console.error('Elementos de vista no encontrados para solicitud');
+        alert('Error: No se encontró la vista de solicitud');
         return;
     }
 
@@ -93,16 +100,21 @@ function mostrarSolicitudInline() {
         solicitudTotal.textContent = formatCurrency(plan.total_a_pagar);
     }
 
-    // Guardar altura actual de la calculadora para mantenerla fija
-    if (calculatorCard) {
-        const currentHeight = calculatorCard.offsetHeight;
-        calculatorCard.style.minHeight = currentHeight + 'px';
-    }
-
     // Ocultar otras vistas y mostrar solicitud
     calculatorView.style.display = 'none';
     if (planPagosView) planPagosView.style.display = 'none';
-    solicitudView.style.display = 'flex';
+
+    // Mostrar solicitud con display block (no flex)
+    solicitudView.style.display = 'block';
+    solicitudView.style.visibility = 'visible';
+    solicitudView.style.opacity = '1';
+
+    console.log('solicitudView mostrado, display:', solicitudView.style.display);
+
+    // Scroll hacia la calculadora
+    if (calculatorCard) {
+        calculatorCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 /**

@@ -1,4 +1,4 @@
-// v2026013006 - Fix syntax error en verificarOTPAutomatico
+// v2026020201 - Fix acordeón grupos: solo uno abierto al clic, inicializar al mostrar formulario
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -110,6 +110,9 @@ function mostrarSolicitudInline() {
     solicitudView.style.opacity = '1';
 
     console.log('solicitudView mostrado, display:', solicitudView.style.display);
+
+    // Inicializar grupos (solo primero abierto, acordeón)
+    initGruposCampos();
 
     // Scroll hacia la calculadora
     if (calculatorCard) {
@@ -466,80 +469,65 @@ function toggleOtroParentescoInline(refNum) {
 
 // ============================================
 // FUNCIONES PARA GRUPOS DE CAMPOS (campo-grupo)
+// Solo UN grupo abierto a la vez (acordeón)
 // ============================================
 
 /**
- * Toggle un grupo específico (expandir/colapsar)
- */
-function toggleGrupo(grupoId) {
-    const grupo = document.getElementById(grupoId);
-    if (!grupo) return;
-
-    const campos = grupo.querySelector('.grupo-campos');
-
-    if (grupo.classList.contains('active')) {
-        // Colapsar
-        grupo.classList.remove('active');
-        if (campos) campos.style.display = 'none';
-    } else {
-        // Expandir
-        grupo.classList.add('active');
-        if (campos) campos.style.display = 'grid';
-    }
-}
-
-/**
- * Activa un grupo (expande) - mantiene los demás como están
+ * Activa un grupo y CIERRA todos los demás (comportamiento acordeón)
  */
 function activarGrupo(grupoId) {
-    const grupo = document.getElementById(grupoId);
-    if (!grupo) return;
+    const grupos = document.querySelectorAll('.campo-grupo');
 
-    grupo.classList.add('active');
-    const campos = grupo.querySelector('.grupo-campos');
-    if (campos) campos.style.display = 'grid';
+    grupos.forEach(grupo => {
+        const campos = grupo.querySelector('.grupo-campos');
+
+        if (grupo.id === grupoId) {
+            // Activar este grupo
+            grupo.classList.add('active');
+            if (campos) campos.style.display = 'grid';
+        } else {
+            // Cerrar los demás
+            grupo.classList.remove('active');
+            if (campos) campos.style.display = 'none';
+        }
+    });
 }
 
 /**
- * Edita un grupo (lo reactiva para edición)
+ * Edita un grupo (lo abre y cierra los demás)
  */
 function editarGrupo(grupoId) {
     activarGrupo(grupoId);
 }
 
 /**
- * Verifica si un grupo está completo - NO USADO
- */
-function verificarGrupoCompleto(grupoId) {
-    return false;
-}
-
-/**
- * DESHABILITADO - El usuario avanza manualmente
- */
-function avanzarSiguienteGrupo(grupoActualId) {
-    return;
-}
-
-/**
  * Inicializa los listeners para los grupos de campos
- * TODOS los grupos permanecen SIEMPRE visibles y expandidos
+ * Solo el PRIMER grupo abierto al inicio, los demás cerrados
  */
 function initGruposCampos() {
     const grupos = document.querySelectorAll('.campo-grupo');
+    let primero = true;
 
     grupos.forEach(grupo => {
-        // Asegurar que todos los grupos estén visibles y expandidos al inicio
-        grupo.classList.add('active');
         const campos = grupo.querySelector('.grupo-campos');
-        if (campos) campos.style.display = 'grid';
 
-        // Click en el header solo hace toggle de ese grupo
+        if (primero) {
+            // Solo el primer grupo abierto
+            grupo.classList.add('active');
+            if (campos) campos.style.display = 'grid';
+            primero = false;
+        } else {
+            // Los demás cerrados
+            grupo.classList.remove('active');
+            if (campos) campos.style.display = 'none';
+        }
+
+        // Click en el header abre este grupo y cierra los demás
         const header = grupo.querySelector('.grupo-header');
         if (header) {
             header.addEventListener('click', (e) => {
                 e.stopPropagation();
-                toggleGrupo(grupo.id);
+                activarGrupo(grupo.id);
             });
         }
     });

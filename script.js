@@ -1,4 +1,4 @@
-// v2026020208 - Layout simétrico 200x150 FIJO, auto-confirmación fotos móvil sin botón Continuar
+// v2026020209 - Fix: foto trasera mismo tamaño, variables de validación sincronizadas
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -321,6 +321,7 @@ async function checkInlinePhotos() {
             if (data.success && data.hasPhoto) {
                 console.log('✅ Foto frontal recibida desde móvil');
                 capturedIDFrontData = data.photoData;
+                inlinePhotoFront = data.photoData; // Para validación
 
                 // Mostrar en preview
                 const previewEl = document.getElementById('inlinePreviewFront');
@@ -354,6 +355,7 @@ async function checkInlinePhotos() {
             if (data.success && data.hasPhoto) {
                 console.log('✅ Foto trasera recibida desde móvil');
                 capturedIDBackData = data.photoData;
+                inlinePhotoBack = data.photoData; // Para validación
 
                 // Mostrar en preview
                 const previewEl = document.getElementById('inlinePreviewBack');

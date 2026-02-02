@@ -317,27 +317,32 @@
                                         </div>
 
                                         <div id="inlineBackSection" style="display:none; margin-top: 20px;">
-                                            <h5>Foto Trasera de Cédula</h5>
-                                            <div class="camera-inline-container">
-                                                <div class="video-wrapper-inline">
-                                                    <video id="inlineCameraBack" autoplay playsinline></video>
-                                                    <div class="id-guide-inline">
-                                                        <div class="corner tl"></div>
-                                                        <div class="corner tr"></div>
-                                                        <div class="corner bl"></div>
-                                                        <div class="corner br"></div>
+                                            <h5 style="text-align: center; margin-bottom: 10px;">Foto Trasera de Cédula</h5>
+                                            <!-- Contenedor centrado con mismo tamaño que frontal -->
+                                            <div style="display: flex; justify-content: center;">
+                                                <div class="camera-side" style="width: 200px; flex-shrink: 0;">
+                                                    <div class="camera-inline-container" style="width: 200px; height: 150px; background: #1a1a2e; border-radius: 10px; overflow: hidden; position: relative;">
+                                                        <div class="video-wrapper-inline" style="width: 100%; height: 100%;">
+                                                            <video id="inlineCameraBack" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+                                                            <div class="id-guide-inline">
+                                                                <div class="corner tl"></div>
+                                                                <div class="corner tr"></div>
+                                                                <div class="corner bl"></div>
+                                                                <div class="corner br"></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="inlineCanvasBack" style="display:none;"></canvas>
+                                                        <div id="inlinePreviewBack" class="photo-preview-inline" style="display:none; width: 100%; height: 100%;">
+                                                            <img id="inlineCapturedBack" src="" alt="Cédula Trasera" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="camera-btns-inline" style="margin-top: 8px; text-align: center;">
+                                                        <button type="button" class="btn-cam" id="inlineStartCamBack">Activar Cámara</button>
+                                                        <button type="button" class="btn-cam" id="inlineCaptureBack" style="display:none;">Tomar Foto</button>
+                                                        <button type="button" class="btn-cam btn-success" id="inlineConfirmBack" style="display:none;">✓ Continuar</button>
+                                                        <button type="button" class="btn-cam btn-secondary" id="inlineRetakeBack" style="display:none;">Repetir</button>
                                                     </div>
                                                 </div>
-                                                <canvas id="inlineCanvasBack" style="display:none;"></canvas>
-                                                <div id="inlinePreviewBack" class="photo-preview-inline" style="display:none;">
-                                                    <img id="inlineCapturedBack" src="" alt="Cédula Trasera">
-                                                </div>
-                                            </div>
-                                            <div class="camera-btns-inline">
-                                                <button type="button" class="btn-cam" id="inlineStartCamBack">Activar Cámara</button>
-                                                <button type="button" class="btn-cam" id="inlineCaptureBack" style="display:none;">Tomar Foto</button>
-                                                <button type="button" class="btn-cam btn-success" id="inlineConfirmBack" style="display:none;">✓ Continuar</button>
-                                                <button type="button" class="btn-cam btn-secondary" id="inlineRetakeBack" style="display:none;">Repetir</button>
                                             </div>
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-// v2026020209 - Fix: foto trasera mismo tamaño, variables de validación sincronizadas
+// v2026020210 - Añadido polling para recibir selfie desde móvil
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -243,6 +243,10 @@ let inlineSessionIdFront = null;
 let inlineSessionIdBack = null;
 let inlinePhotoCheckInterval = null;
 
+// Variables para selfie desde móvil
+let selfieSessionId = null;
+let selfiePhotoCheckInterval = null;
+
 /**
  * Inicializa el código QR para el paso de cámara inline
  */
@@ -422,8 +426,8 @@ function initSelfieQRCode() {
     } else {
         // En desktop, NO modificar display (ya está en flex en HTML)
         // Generar URL única para la sesión de selfie
-        const sessionId = 'selfie_' + Date.now().toString(36) + Math.random().toString(36).substr(2);
-        const qrUrl = `${window.location.origin}/mobile-camera.html?session=${sessionId}&type=selfie`;
+        selfieSessionId = 'selfie_' + Date.now().toString(36) + Math.random().toString(36).substr(2);
+        const qrUrl = `${window.location.origin}/mobile-camera.html?session=${selfieSessionId}&type=selfie`;
 
         // Limpiar QR anterior y generar nuevo
         qrContainer.innerHTML = '';
@@ -439,10 +443,81 @@ function initSelfieQRCode() {
                     correctLevel: QRCode.CorrectLevel.M
                 });
                 console.log('QR Selfie generado:', qrUrl);
+                console.log('Session Selfie:', selfieSessionId);
+
+                // Iniciar polling para recibir selfie
+                startSelfiePhotoCheck();
             } catch (e) {
                 console.error('Error creando QR selfie inline:', e);
             }
         }
+    }
+}
+
+/**
+ * Inicia polling para verificar selfie desde móvil
+ */
+function startSelfiePhotoCheck() {
+    // Detener polling anterior si existe
+    if (selfiePhotoCheckInterval) {
+        clearInterval(selfiePhotoCheckInterval);
+    }
+
+    console.log('Iniciando polling para selfie...');
+
+    selfiePhotoCheckInterval = setInterval(async () => {
+        await checkSelfiePhoto();
+    }, 3000);
+}
+
+/**
+ * Verifica si hay selfie disponible desde el móvil
+ */
+async function checkSelfiePhoto() {
+    try {
+        if (selfieSessionId && !inlinePhotoSelfie) {
+            const response = await fetch(`${API_CONFIG.BASE_URL}/api/photo-sync/check/${selfieSessionId}`);
+            const data = await response.json();
+
+            if (data.success && data.hasPhoto) {
+                console.log('✅ Selfie recibida desde móvil');
+                inlinePhotoSelfie = data.photoData;
+                capturedSelfieData = data.photoData;
+
+                // Mostrar en preview
+                const previewEl = document.getElementById('inlinePreviewSelfie');
+                const capturedEl = document.getElementById('inlineCapturedSelfie');
+                const videoWrapper = document.querySelector('#inlineStep3 .video-wrapper-inline');
+
+                if (capturedEl) capturedEl.src = data.photoData;
+                if (previewEl) previewEl.style.display = 'block';
+                if (videoWrapper) videoWrapper.style.display = 'none';
+
+                // Ocultar botones de cámara
+                const startCamSelfie = document.getElementById('inlineStartCamSelfie');
+                const captureSelfie = document.getElementById('inlineCaptureSelfie');
+                if (startCamSelfie) startCamSelfie.style.display = 'none';
+                if (captureSelfie) captureSelfie.style.display = 'none';
+
+                // Detener polling
+                stopSelfiePhotoCheck();
+
+                console.log('✅ Selfie confirmada automáticamente desde móvil');
+            }
+        }
+    } catch (error) {
+        console.error('Error verificando selfie:', error);
+    }
+}
+
+/**
+ * Detiene el polling de selfie
+ */
+function stopSelfiePhotoCheck() {
+    if (selfiePhotoCheckInterval) {
+        clearInterval(selfiePhotoCheckInterval);
+        selfiePhotoCheckInterval = null;
+        console.log('Polling de selfie detenido');
     }
 }
 

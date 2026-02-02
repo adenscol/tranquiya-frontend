@@ -1,4 +1,4 @@
-// v2026020206 - Fix layout QR al lado con flex, fix sesión móvil
+// v2026020207 - Layout simétrico, polling para recibir fotos desde móvil
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -238,6 +238,11 @@ function updateInlineStepUI() {
     }
 }
 
+// Variables globales para sesiones de fotos desde móvil
+let inlineSessionIdFront = null;
+let inlineSessionIdBack = null;
+let inlinePhotoCheckInterval = null;
+
 /**
  * Inicializa el código QR para el paso de cámara inline
  */
@@ -254,10 +259,12 @@ function initInlineQRCode() {
         // En móvil, ocultar sección QR
         qrSection.style.display = 'none';
     } else {
-        // En desktop, NO modificar display (ya está en flex en HTML)
-        // Generar URL única para la sesión - página de cédula
-        const sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
-        const qrUrl = `${window.location.origin}/mobile-id-camera.html?session=${sessionId}`;
+        // En desktop - Generar URL única para la sesión de cédula
+        const baseSessionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
+        inlineSessionIdFront = baseSessionId + '_front';
+        inlineSessionIdBack = baseSessionId + '_back';
+
+        const qrUrl = `${window.location.origin}/mobile-id-camera.html?session=${baseSessionId}`;
 
         // Limpiar QR anterior y generar nuevo
         qrContainer.innerHTML = '';
@@ -266,17 +273,115 @@ function initInlineQRCode() {
             try {
                 new QRCode(qrContainer, {
                     text: qrUrl,
-                    width: 130,
-                    height: 130,
+                    width: 140,
+                    height: 140,
                     colorDark: '#003087',
                     colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.M
                 });
                 console.log('QR Cédula generado:', qrUrl);
+                console.log('Session Front:', inlineSessionIdFront);
+                console.log('Session Back:', inlineSessionIdBack);
+
+                // Iniciar polling para recibir fotos
+                startInlinePhotoCheck();
             } catch (e) {
                 console.error('Error creando QR inline:', e);
             }
         }
+    }
+}
+
+/**
+ * Inicia polling para verificar fotos desde móvil
+ */
+function startInlinePhotoCheck() {
+    // Detener polling anterior si existe
+    if (inlinePhotoCheckInterval) {
+        clearInterval(inlinePhotoCheckInterval);
+    }
+
+    console.log('Iniciando polling para fotos de cédula...');
+
+    inlinePhotoCheckInterval = setInterval(async () => {
+        await checkInlinePhotos();
+    }, 3000);
+}
+
+/**
+ * Verifica si hay fotos disponibles desde el móvil
+ */
+async function checkInlinePhotos() {
+    try {
+        // Verificar foto frontal
+        if (inlineSessionIdFront && !capturedIDFrontData) {
+            const response = await fetch(`${API_CONFIG.BASE_URL}/api/photo-sync/check/${inlineSessionIdFront}`);
+            const data = await response.json();
+
+            if (data.success && data.hasPhoto) {
+                console.log('✅ Foto frontal recibida desde móvil');
+                capturedIDFrontData = data.photoData;
+
+                // Mostrar en preview
+                const previewEl = document.getElementById('inlinePreviewFront');
+                const capturedEl = document.getElementById('inlineCapturedFront');
+                const videoWrapper = document.querySelector('#inlineStep2 .video-wrapper-inline');
+
+                if (capturedEl) capturedEl.src = data.photoData;
+                if (previewEl) previewEl.style.display = 'block';
+                if (videoWrapper) videoWrapper.style.display = 'none';
+
+                // Mostrar botones
+                document.getElementById('inlineStartCamFront').style.display = 'none';
+                document.getElementById('inlineConfirmFront').style.display = 'inline-block';
+                document.getElementById('inlineRetakeFront').style.display = 'inline-block';
+            }
+        }
+
+        // Verificar foto trasera
+        if (inlineSessionIdBack && !capturedIDBackData) {
+            const response = await fetch(`${API_CONFIG.BASE_URL}/api/photo-sync/check/${inlineSessionIdBack}`);
+            const data = await response.json();
+
+            if (data.success && data.hasPhoto) {
+                console.log('✅ Foto trasera recibida desde móvil');
+                capturedIDBackData = data.photoData;
+
+                // Mostrar en preview
+                const previewEl = document.getElementById('inlinePreviewBack');
+                const capturedEl = document.getElementById('inlineCapturedBack');
+                const videoWrapper = document.querySelector('#inlineBackSection .video-wrapper-inline');
+
+                if (capturedEl) capturedEl.src = data.photoData;
+                if (previewEl) previewEl.style.display = 'block';
+                if (videoWrapper) videoWrapper.style.display = 'none';
+
+                // Mostrar botones
+                document.getElementById('inlineStartCamBack').style.display = 'none';
+                document.getElementById('inlineConfirmBack').style.display = 'inline-block';
+                document.getElementById('inlineRetakeBack').style.display = 'inline-block';
+            }
+        }
+
+        // Si ambas fotos están listas, detener polling
+        if (capturedIDFrontData && capturedIDBackData) {
+            console.log('✅ Ambas fotos de cédula recibidas');
+            stopInlinePhotoCheck();
+        }
+
+    } catch (error) {
+        console.error('Error verificando fotos:', error);
+    }
+}
+
+/**
+ * Detiene el polling de fotos
+ */
+function stopInlinePhotoCheck() {
+    if (inlinePhotoCheckInterval) {
+        clearInterval(inlinePhotoCheckInterval);
+        inlinePhotoCheckInterval = null;
+        console.log('Polling de fotos detenido');
     }
 }
 

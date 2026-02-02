@@ -1,4 +1,4 @@
-// v2026020201 - Fix acordeón grupos: solo uno abierto al clic, inicializar al mostrar formulario
+// v2026020202 - Fix QR selfie, redirección a cliente-portal.html
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -229,6 +229,13 @@ function updateInlineStepUI() {
     if (inlineCurrentStep === 2) {
         initInlineQRCode();
     }
+
+    // Mostrar QR en paso 3 (selfie) si está en desktop
+    if (inlineCurrentStep === 3) {
+        setTimeout(() => {
+            initSelfieQRCode();
+        }, 100);
+    }
 }
 
 /**
@@ -273,6 +280,63 @@ function initInlineQRCode() {
                 qrSection.style.display = 'none';
             }
         } else {
+            qrSection.style.display = 'none';
+        }
+    }
+}
+
+/**
+ * Inicializa el código QR para el paso de selfie inline
+ */
+function initSelfieQRCode() {
+    const qrSection = document.getElementById('qrSelfieSectionInline');
+    const qrContainer = document.getElementById('qrCodeSelfieInline');
+    const qrStatus = document.getElementById('qrStatusSelfieInline');
+
+    if (!qrSection || !qrContainer) {
+        console.log('Contenedores QR selfie no encontrados');
+        return;
+    }
+
+    // Detectar si es móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // En móvil, ocultar sección QR (ya tiene cámara directa)
+        qrSection.style.display = 'none';
+    } else {
+        // En desktop, mostrar QR
+        qrSection.style.display = 'block';
+
+        // Generar URL única para la sesión de selfie
+        const sessionId = 'selfie_' + Date.now().toString(36) + Math.random().toString(36).substr(2);
+        const qrUrl = `${window.location.origin}/mobile-camera.html?session=${sessionId}&type=selfie`;
+
+        // Limpiar QR anterior
+        qrContainer.innerHTML = '';
+
+        // Crear QR si la librería está disponible
+        if (typeof QRCode !== 'undefined') {
+            try {
+                new QRCode(qrContainer, {
+                    text: qrUrl,
+                    width: 150,
+                    height: 150,
+                    colorDark: '#003087',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+                if (qrStatus) {
+                    qrStatus.textContent = '✓ Escanea para tomar selfie desde tu celular';
+                    qrStatus.style.color = '#2e7d32';
+                }
+                console.log('QR Selfie generado:', qrUrl);
+            } catch (e) {
+                console.error('Error creando QR selfie inline:', e);
+                qrSection.style.display = 'none';
+            }
+        } else {
+            console.log('Librería QRCode no disponible');
             qrSection.style.display = 'none';
         }
     }
@@ -1054,8 +1118,8 @@ async function submitInlineForm() {
             // Resetear formulario
             resetInlineForm();
 
-            // Redirigir al portal de usuario
-            window.location.href = 'usuario.html?registro=exitoso';
+            // Redirigir al portal de cliente
+            window.location.href = 'cliente-portal.html?registro=exitoso';
         } else {
             throw new Error(response.error || 'Error desconocido al registrar');
         }

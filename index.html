@@ -358,6 +358,12 @@
                                             <button type="button" class="btn-cam" id="inlineCaptureSelfie" style="display:none;">Tomar Foto</button>
                                             <button type="button" class="btn-cam btn-secondary" id="inlineRetakeSelfie" style="display:none;">Repetir</button>
                                         </div>
+                                        <!-- QR para selfie desde móvil -->
+                                        <div id="qrSelfieSectionInline" class="qr-camera-section" style="margin-top: 15px;">
+                                            <p class="photo-hint" style="font-size: 13px; color: #666;">¿Problemas con la cámara? Escanea el QR con tu celular:</p>
+                                            <div id="qrCodeSelfieInline" class="qr-code-inline" style="margin: 10px auto; width: 150px; height: 150px;"></div>
+                                            <p id="qrStatusSelfieInline" class="qr-hint" style="font-size: 12px; color: #888;">Generando código QR...</p>
+                                        </div>
                                         <div class="solicitud-terms">
                                             <label class="checkbox-inline">
                                                 <input type="checkbox" id="inlineTerms" required>
@@ -1204,7 +1210,7 @@
     <script src="qrcode.min.js"></script>
 
     <script src="api-config.js?v=202601191648"></script>
-    <script src="script.js?v=202602020201"></script>
+    <script src="script.js?v=202602020202"></script>
 </body>
 </html>
     <script type="application/ld+json">

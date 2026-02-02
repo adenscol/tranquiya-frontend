@@ -1,4 +1,4 @@
-// v2026020211 - Debug mejorado para polling de selfie
+// v2026020212 - Términos y condiciones movidos a validación del paso 4
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -903,18 +903,20 @@ function validateInlineStep(step) {
         }
 
     } else if (step === 3) {
-        // Paso 3: Selfie y términos
+        // Paso 3: Solo selfie (términos movidos al paso 4)
         if (!inlinePhotoSelfie) {
             alert('Debes tomar la foto de verificación');
             return false;
         }
+
+    } else if (step === 4) {
+        // Verificar términos y condiciones primero
         const terms = document.getElementById('inlineTerms');
         if (!terms || !terms.checked) {
             alert('Debes aceptar los términos y condiciones');
             return false;
         }
 
-    } else if (step === 4) {
         // Paso 4: Datos bancarios + OTP + Contraseña
         const fields = [
             { id: 'inlineBanco', name: 'Banco' },

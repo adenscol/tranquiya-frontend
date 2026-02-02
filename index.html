@@ -281,36 +281,42 @@
                                     <!-- PASO 2: Fotos de Cédula -->
                                     <div class="inline-step" id="inlineStep2">
                                         <h5>Foto Frontal de Cédula</h5>
-                                        <!-- QR para móvil -->
-                                        <div id="qrCameraSection" class="qr-camera-section" style="display:none;">
-                                            <p class="photo-hint">Escanea el QR con tu celular para tomar las fotos</p>
-                                            <div id="qrCodeInline" class="qr-code-inline"></div>
-                                            <p class="qr-hint">O continúa desde este dispositivo:</p>
-                                        </div>
                                         <p class="photo-hint">📱 Gira tu teléfono HORIZONTAL</p>
-                                        <div class="camera-inline-container">
-                                            <div class="video-wrapper-inline">
-                                                <video id="inlineCameraFront" autoplay playsinline></video>
-                                                <div class="id-guide-inline">
-                                                    <div class="corner tl"></div>
-                                                    <div class="corner tr"></div>
-                                                    <div class="corner bl"></div>
-                                                    <div class="corner br"></div>
+                                        <!-- Contenedor flex: Cámara + QR lado a lado -->
+                                        <div class="camera-qr-row" style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+                                            <!-- Cámara lado izquierdo -->
+                                            <div class="camera-side" style="flex: 1; min-width: 250px;">
+                                                <div class="camera-inline-container">
+                                                    <div class="video-wrapper-inline">
+                                                        <video id="inlineCameraFront" autoplay playsinline></video>
+                                                        <div class="id-guide-inline">
+                                                            <div class="corner tl"></div>
+                                                            <div class="corner tr"></div>
+                                                            <div class="corner bl"></div>
+                                                            <div class="corner br"></div>
+                                                        </div>
+                                                    </div>
+                                                    <canvas id="inlineCanvasFront" style="display:none;"></canvas>
+                                                    <div id="inlinePreviewFront" class="photo-preview-inline" style="display:none;">
+                                                        <img id="inlineCapturedFront" src="" alt="Cédula Frontal">
+                                                    </div>
+                                                </div>
+                                                <div class="camera-btns-inline">
+                                                    <button type="button" class="btn-cam" id="inlineStartCamFront">Activar Cámara</button>
+                                                    <button type="button" class="btn-cam" id="inlineCaptureFront" style="display:none;">Tomar Foto</button>
+                                                    <button type="button" class="btn-cam btn-success" id="inlineConfirmFront" style="display:none;">✓ Continuar</button>
+                                                    <button type="button" class="btn-cam btn-secondary" id="inlineRetakeFront" style="display:none;">Repetir</button>
                                                 </div>
                                             </div>
-                                            <canvas id="inlineCanvasFront" style="display:none;"></canvas>
-                                            <div id="inlinePreviewFront" class="photo-preview-inline" style="display:none;">
-                                                <img id="inlineCapturedFront" src="" alt="Cédula Frontal">
+                                            <!-- QR lado derecho -->
+                                            <div id="qrCameraSection" class="qr-side" style="flex: 0 0 180px; text-align: center; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                                <p class="photo-hint" style="font-size: 12px; margin-bottom: 10px;">Escanea el QR con tu celular para tomar las fotos</p>
+                                                <div id="qrCodeInline" class="qr-code-inline" style="margin: 0 auto;"></div>
+                                                <p class="qr-hint" style="font-size: 11px; margin-top: 8px; color: #666;">O continúa desde este dispositivo</p>
                                             </div>
                                         </div>
-                                        <div class="camera-btns-inline">
-                                            <button type="button" class="btn-cam" id="inlineStartCamFront">Activar Cámara</button>
-                                            <button type="button" class="btn-cam" id="inlineCaptureFront" style="display:none;">Tomar Foto</button>
-                                            <button type="button" class="btn-cam btn-success" id="inlineConfirmFront" style="display:none;">✓ Continuar</button>
-                                            <button type="button" class="btn-cam btn-secondary" id="inlineRetakeFront" style="display:none;">Repetir</button>
-                                        </div>
 
-                                        <div id="inlineBackSection" style="display:none;">
+                                        <div id="inlineBackSection" style="display:none; margin-top: 20px;">
                                             <h5>Foto Trasera de Cédula</h5>
                                             <div class="camera-inline-container">
                                                 <div class="video-wrapper-inline">
@@ -336,39 +342,39 @@
                                         </div>
                                     </div>
 
-                                    <!-- PASO 3: Verificación (selfie con cédula) + Términos -->
+                                    <!-- PASO 3: Verificación (selfie con cédula) -->
                                     <div class="inline-step" id="inlineStep3">
                                         <h5>Verificación de Identidad</h5>
                                         <p class="photo-hint">Sostén tu cédula junto a tu rostro</p>
-                                        <div class="camera-inline-container">
-                                            <div class="video-wrapper-inline video-selfie">
-                                                <video id="inlineCameraSelfie" autoplay playsinline></video>
-                                                <div class="selfie-guide-inline">
-                                                    <div class="face-outline"></div>
-                                                    <div class="id-outline"></div>
+                                        <!-- Contenedor flex: Cámara + QR lado a lado -->
+                                        <div class="camera-qr-row" style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+                                            <!-- Cámara lado izquierdo -->
+                                            <div class="camera-side" style="flex: 1; min-width: 250px;">
+                                                <div class="camera-inline-container">
+                                                    <div class="video-wrapper-inline video-selfie">
+                                                        <video id="inlineCameraSelfie" autoplay playsinline></video>
+                                                        <div class="selfie-guide-inline">
+                                                            <div class="face-outline"></div>
+                                                            <div class="id-outline"></div>
+                                                        </div>
+                                                    </div>
+                                                    <canvas id="inlineCanvasSelfie" style="display:none;"></canvas>
+                                                    <div id="inlinePreviewSelfie" class="photo-preview-inline" style="display:none;">
+                                                        <img id="inlineCapturedSelfie" src="" alt="Verificación">
+                                                    </div>
+                                                </div>
+                                                <div class="camera-btns-inline">
+                                                    <button type="button" class="btn-cam" id="inlineStartCamSelfie">Activar Cámara</button>
+                                                    <button type="button" class="btn-cam" id="inlineCaptureSelfie" style="display:none;">Tomar Foto</button>
+                                                    <button type="button" class="btn-cam btn-secondary" id="inlineRetakeSelfie" style="display:none;">Repetir</button>
                                                 </div>
                                             </div>
-                                            <canvas id="inlineCanvasSelfie" style="display:none;"></canvas>
-                                            <div id="inlinePreviewSelfie" class="photo-preview-inline" style="display:none;">
-                                                <img id="inlineCapturedSelfie" src="" alt="Verificación">
+                                            <!-- QR lado derecho para selfie -->
+                                            <div id="qrSelfieSectionInline" class="qr-side" style="flex: 0 0 180px; text-align: center; padding: 10px; background: #f8f9fa; border-radius: 10px;">
+                                                <p class="photo-hint" style="font-size: 12px; margin-bottom: 10px;">Escanea el QR con tu celular para tomar la selfie</p>
+                                                <div id="qrCodeSelfieInline" class="qr-code-inline" style="margin: 0 auto;"></div>
+                                                <p id="qrStatusSelfieInline" class="qr-hint" style="font-size: 11px; margin-top: 8px; color: #666;">O continúa desde este dispositivo</p>
                                             </div>
-                                        </div>
-                                        <div class="camera-btns-inline">
-                                            <button type="button" class="btn-cam" id="inlineStartCamSelfie">Activar Cámara</button>
-                                            <button type="button" class="btn-cam" id="inlineCaptureSelfie" style="display:none;">Tomar Foto</button>
-                                            <button type="button" class="btn-cam btn-secondary" id="inlineRetakeSelfie" style="display:none;">Repetir</button>
-                                        </div>
-                                        <!-- QR para selfie desde móvil -->
-                                        <div id="qrSelfieSectionInline" class="qr-camera-section" style="margin-top: 15px;">
-                                            <p class="photo-hint" style="font-size: 13px; color: #666;">¿Problemas con la cámara? Escanea el QR con tu celular:</p>
-                                            <div id="qrCodeSelfieInline" class="qr-code-inline" style="margin: 10px auto; width: 150px; height: 150px;"></div>
-                                            <p id="qrStatusSelfieInline" class="qr-hint" style="font-size: 12px; color: #888;">Generando código QR...</p>
-                                        </div>
-                                        <div class="solicitud-terms">
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineTerms" required>
-                                                <span>Acepto los <a href="#" class="link-inline" onclick="mostrarTerminos(event)">términos y condiciones</a> y la <a href="#" class="link-inline" onclick="mostrarPrivacidad(event)">política de privacidad</a></span>
-                                            </label>
                                         </div>
                                     </div>
 
@@ -401,6 +407,14 @@
                                         <div class="form-group-inline full-width">
                                             <label for="inlineNumeroCuenta">Número de Cuenta *</label>
                                             <input type="text" id="inlineNumeroCuenta" name="numeroCuenta" required>
+                                        </div>
+
+                                        <!-- Términos y Condiciones -->
+                                        <div class="solicitud-terms" style="margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" id="inlineTerms" required>
+                                                <span>Acepto los <a href="#" class="link-inline" onclick="mostrarTerminos(event)">términos y condiciones</a> y la <a href="#" class="link-inline" onclick="mostrarPrivacidad(event)">política de privacidad</a></span>
+                                            </label>
                                         </div>
 
                                         <h5>Firma Digital (OTP)</h5>
@@ -1210,7 +1224,7 @@
     <script src="qrcode.min.js"></script>
 
     <script src="api-config.js?v=202601191648"></script>
-    <script src="script.js?v=202602020204"></script>
+    <script src="script.js?v=202602020205"></script>
 </body>
 </html>
     <script type="application/ld+json">

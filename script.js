@@ -1,4 +1,4 @@
-// v2026020204 - Fix capturedSelfieData variable
+// v2026020205 - QR al lado, términos en paso 4, URLs correctas
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -254,12 +254,14 @@ function initInlineQRCode() {
         // En móvil, ocultar sección QR
         qrSection.style.display = 'none';
     } else {
-        // En desktop, mostrar QR
-        qrSection.style.display = 'block';
+        // En desktop, mostrar QR al lado
+        qrSection.style.display = 'flex';
+        qrSection.style.flexDirection = 'column';
+        qrSection.style.alignItems = 'center';
 
-        // Generar URL única para la sesión
+        // Generar URL única para la sesión - página de cédula
         const sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
-        const qrUrl = `${window.location.origin}/camera.html?session=${sessionId}`;
+        const qrUrl = `${window.location.origin}/mobile-id-camera.html?session=${sessionId}&type=cedula`;
 
         // Limpiar QR anterior
         qrContainer.innerHTML = '';
@@ -269,12 +271,13 @@ function initInlineQRCode() {
             try {
                 new QRCode(qrContainer, {
                     text: qrUrl,
-                    width: 70,
-                    height: 70,
+                    width: 130,
+                    height: 130,
                     colorDark: '#003087',
                     colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.M
                 });
+                console.log('QR Cédula generado:', qrUrl);
             } catch (e) {
                 console.error('Error creando QR inline:', e);
                 qrSection.style.display = 'none';
@@ -305,8 +308,10 @@ function initSelfieQRCode() {
         // En móvil, ocultar sección QR (ya tiene cámara directa)
         qrSection.style.display = 'none';
     } else {
-        // En desktop, mostrar QR
-        qrSection.style.display = 'block';
+        // En desktop, mostrar QR al lado
+        qrSection.style.display = 'flex';
+        qrSection.style.flexDirection = 'column';
+        qrSection.style.alignItems = 'center';
 
         // Generar URL única para la sesión de selfie
         const sessionId = 'selfie_' + Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -320,15 +325,15 @@ function initSelfieQRCode() {
             try {
                 new QRCode(qrContainer, {
                     text: qrUrl,
-                    width: 150,
-                    height: 150,
+                    width: 130,
+                    height: 130,
                     colorDark: '#003087',
                     colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.M
                 });
                 if (qrStatus) {
-                    qrStatus.textContent = '✓ Escanea para tomar selfie desde tu celular';
-                    qrStatus.style.color = '#2e7d32';
+                    qrStatus.textContent = 'O continúa desde este dispositivo';
+                    qrStatus.style.color = '#666';
                 }
                 console.log('QR Selfie generado:', qrUrl);
             } catch (e) {

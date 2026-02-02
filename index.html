@@ -280,13 +280,13 @@
 
                                     <!-- PASO 2: Fotos de Cédula -->
                                     <div class="inline-step" id="inlineStep2">
-                                        <h5 style="text-align: center;">Foto Frontal de Cédula</h5>
-                                        <p class="photo-hint" style="text-align: center;">📱 Gira tu teléfono HORIZONTAL</p>
-                                        <!-- Contenedor flex simétrico -->
-                                        <div class="camera-qr-row" style="display: flex !important; flex-direction: row !important; gap: 15px; align-items: stretch; justify-content: center;">
-                                            <!-- Cámara lado izquierdo -->
-                                            <div class="camera-side" style="flex: 1 1 50%; max-width: 220px; display: flex; flex-direction: column; align-items: center;">
-                                                <div class="camera-inline-container" style="width: 100%; aspect-ratio: 4/3; background: #1a1a2e; border-radius: 10px; overflow: hidden; position: relative;">
+                                        <h5 style="text-align: center; margin-bottom: 5px;">Foto Frontal de Cédula</h5>
+                                        <p class="photo-hint" style="text-align: center; margin-bottom: 15px; font-size: 12px;">📱 Gira tu teléfono HORIZONTAL</p>
+                                        <!-- Contenedor flex PERFECTAMENTE simétrico -->
+                                        <div class="camera-qr-row" style="display: flex !important; flex-direction: row !important; gap: 20px; align-items: flex-start; justify-content: center; margin: 0 auto; max-width: 460px;">
+                                            <!-- Cámara lado izquierdo - 200x150 FIJO -->
+                                            <div class="camera-side" style="width: 200px; flex-shrink: 0;">
+                                                <div class="camera-inline-container" style="width: 200px; height: 150px; background: #1a1a2e; border-radius: 10px; overflow: hidden; position: relative;">
                                                     <div class="video-wrapper-inline" style="width: 100%; height: 100%;">
                                                         <video id="inlineCameraFront" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
                                                         <div class="id-guide-inline">
@@ -297,22 +297,22 @@
                                                         </div>
                                                     </div>
                                                     <canvas id="inlineCanvasFront" style="display:none;"></canvas>
-                                                    <div id="inlinePreviewFront" class="photo-preview-inline" style="display:none;">
+                                                    <div id="inlinePreviewFront" class="photo-preview-inline" style="display:none; width: 100%; height: 100%;">
                                                         <img id="inlineCapturedFront" src="" alt="Cédula Frontal" style="width: 100%; height: 100%; object-fit: cover;">
                                                     </div>
                                                 </div>
-                                                <div class="camera-btns-inline" style="margin-top: 10px;">
+                                                <div class="camera-btns-inline" style="margin-top: 8px; text-align: center;">
                                                     <button type="button" class="btn-cam" id="inlineStartCamFront">Activar Cámara</button>
                                                     <button type="button" class="btn-cam" id="inlineCaptureFront" style="display:none;">Tomar Foto</button>
                                                     <button type="button" class="btn-cam btn-success" id="inlineConfirmFront" style="display:none;">✓ Continuar</button>
                                                     <button type="button" class="btn-cam btn-secondary" id="inlineRetakeFront" style="display:none;">Repetir</button>
                                                 </div>
                                             </div>
-                                            <!-- QR lado derecho - mismo tamaño -->
-                                            <div id="qrCameraSection" class="qr-side" style="flex: 1 1 50%; max-width: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 15px; background: #f8f9fa; border-radius: 10px; border: 1px solid #e0e0e0;">
-                                                <p style="font-size: 12px; margin-bottom: 10px; color: #333; font-weight: 500; text-align: center;">Escanea el QR con tu celular para tomar las fotos</p>
-                                                <div id="qrCodeInline" style="width: 140px; height: 140px;"></div>
-                                                <p style="font-size: 11px; margin-top: 10px; color: #666; text-align: center;">O continúa desde este dispositivo</p>
+                                            <!-- QR lado derecho - EXACTAMENTE 200x150 FIJO -->
+                                            <div id="qrCameraSection" class="qr-side" style="width: 200px; height: 150px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8f9fa; border-radius: 10px; border: 1px solid #e0e0e0; box-sizing: border-box;">
+                                                <p style="font-size: 10px; margin: 0 0 5px 0; color: #333; font-weight: 500; text-align: center; line-height: 1.2; padding: 0 5px;">Escanea el QR para tomar fotos desde el celular</p>
+                                                <div id="qrCodeInline" style="width: 100px; height: 100px;"></div>
+                                                <p style="font-size: 9px; margin: 5px 0 0 0; color: #666; text-align: center;">O usa la cámara de este dispositivo</p>
                                             </div>
                                         </div>
 
@@ -344,13 +344,13 @@
 
                                     <!-- PASO 3: Verificación (selfie con cédula) -->
                                     <div class="inline-step" id="inlineStep3">
-                                        <h5 style="text-align: center;">Verificación de Identidad</h5>
-                                        <p class="photo-hint" style="text-align: center;">Sostén tu cédula junto a tu rostro</p>
-                                        <!-- Contenedor flex simétrico -->
-                                        <div class="camera-qr-row" style="display: flex !important; flex-direction: row !important; gap: 15px; align-items: stretch; justify-content: center;">
-                                            <!-- Cámara lado izquierdo -->
-                                            <div class="camera-side" style="flex: 1 1 50%; max-width: 220px; display: flex; flex-direction: column; align-items: center;">
-                                                <div class="camera-inline-container" style="width: 100%; aspect-ratio: 4/3; background: #1a1a2e; border-radius: 10px; overflow: hidden; position: relative;">
+                                        <h5 style="text-align: center; margin-bottom: 5px;">Verificación de Identidad</h5>
+                                        <p class="photo-hint" style="text-align: center; margin-bottom: 15px; font-size: 12px;">Sostén tu cédula junto a tu rostro</p>
+                                        <!-- Contenedor flex PERFECTAMENTE simétrico -->
+                                        <div class="camera-qr-row" style="display: flex !important; flex-direction: row !important; gap: 20px; align-items: flex-start; justify-content: center; margin: 0 auto; max-width: 460px;">
+                                            <!-- Cámara lado izquierdo - 200x150 FIJO -->
+                                            <div class="camera-side" style="width: 200px; flex-shrink: 0;">
+                                                <div class="camera-inline-container" style="width: 200px; height: 150px; background: #1a1a2e; border-radius: 10px; overflow: hidden; position: relative;">
                                                     <div class="video-wrapper-inline video-selfie" style="width: 100%; height: 100%;">
                                                         <video id="inlineCameraSelfie" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
                                                         <div class="selfie-guide-inline">
@@ -359,21 +359,21 @@
                                                         </div>
                                                     </div>
                                                     <canvas id="inlineCanvasSelfie" style="display:none;"></canvas>
-                                                    <div id="inlinePreviewSelfie" class="photo-preview-inline" style="display:none;">
+                                                    <div id="inlinePreviewSelfie" class="photo-preview-inline" style="display:none; width: 100%; height: 100%;">
                                                         <img id="inlineCapturedSelfie" src="" alt="Verificación" style="width: 100%; height: 100%; object-fit: cover;">
                                                     </div>
                                                 </div>
-                                                <div class="camera-btns-inline" style="margin-top: 10px;">
+                                                <div class="camera-btns-inline" style="margin-top: 8px; text-align: center;">
                                                     <button type="button" class="btn-cam" id="inlineStartCamSelfie">Activar Cámara</button>
                                                     <button type="button" class="btn-cam" id="inlineCaptureSelfie" style="display:none;">Tomar Foto</button>
                                                     <button type="button" class="btn-cam btn-secondary" id="inlineRetakeSelfie" style="display:none;">Repetir</button>
                                                 </div>
                                             </div>
-                                            <!-- QR lado derecho - mismo tamaño -->
-                                            <div id="qrSelfieSectionInline" class="qr-side" style="flex: 1 1 50%; max-width: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 15px; background: #f8f9fa; border-radius: 10px; border: 1px solid #e0e0e0;">
-                                                <p style="font-size: 12px; margin-bottom: 10px; color: #333; font-weight: 500; text-align: center;">Escanea el QR con tu celular para tomar la selfie</p>
-                                                <div id="qrCodeSelfieInline" style="width: 140px; height: 140px;"></div>
-                                                <p id="qrStatusSelfieInline" style="font-size: 11px; margin-top: 10px; color: #666; text-align: center;">O continúa desde este dispositivo</p>
+                                            <!-- QR lado derecho - EXACTAMENTE 200x150 FIJO -->
+                                            <div id="qrSelfieSectionInline" class="qr-side" style="width: 200px; height: 150px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8f9fa; border-radius: 10px; border: 1px solid #e0e0e0; box-sizing: border-box;">
+                                                <p style="font-size: 10px; margin: 0 0 5px 0; color: #333; font-weight: 500; text-align: center; line-height: 1.2; padding: 0 5px;">Escanea el QR para tomar la selfie desde el celular</p>
+                                                <div id="qrCodeSelfieInline" style="width: 100px; height: 100px;"></div>
+                                                <p id="qrStatusSelfieInline" style="font-size: 9px; margin: 5px 0 0 0; color: #666; text-align: center;">O usa la cámara de este dispositivo</p>
                                             </div>
                                         </div>
                                     </div>

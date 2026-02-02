@@ -1,4 +1,4 @@
-// v2026020207 - Layout simétrico, polling para recibir fotos desde móvil
+// v2026020208 - Layout simétrico 200x150 FIJO, auto-confirmación fotos móvil sin botón Continuar
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -273,8 +273,8 @@ function initInlineQRCode() {
             try {
                 new QRCode(qrContainer, {
                     text: qrUrl,
-                    width: 140,
-                    height: 140,
+                    width: 100,
+                    height: 100,
                     colorDark: '#003087',
                     colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.M
@@ -331,10 +331,18 @@ async function checkInlinePhotos() {
                 if (previewEl) previewEl.style.display = 'block';
                 if (videoWrapper) videoWrapper.style.display = 'none';
 
-                // Mostrar botones
-                document.getElementById('inlineStartCamFront').style.display = 'none';
-                document.getElementById('inlineConfirmFront').style.display = 'inline-block';
-                document.getElementById('inlineRetakeFront').style.display = 'inline-block';
+                // Ocultar botones de cámara
+                const startCamFront = document.getElementById('inlineStartCamFront');
+                const captureFront = document.getElementById('inlineCaptureFront');
+                if (startCamFront) startCamFront.style.display = 'none';
+                if (captureFront) captureFront.style.display = 'none';
+
+                // AUTO-AVANZAR: Mostrar sección de foto trasera automáticamente
+                const backSection = document.getElementById('inlineBackSection');
+                if (backSection) {
+                    backSection.style.display = 'block';
+                    console.log('✅ Sección de foto trasera mostrada automáticamente');
+                }
             }
         }
 
@@ -356,10 +364,15 @@ async function checkInlinePhotos() {
                 if (previewEl) previewEl.style.display = 'block';
                 if (videoWrapper) videoWrapper.style.display = 'none';
 
-                // Mostrar botones
-                document.getElementById('inlineStartCamBack').style.display = 'none';
-                document.getElementById('inlineConfirmBack').style.display = 'inline-block';
-                document.getElementById('inlineRetakeBack').style.display = 'inline-block';
+                // Ocultar botones de cámara (fotos desde móvil ya están confirmadas)
+                const startCamBack = document.getElementById('inlineStartCamBack');
+                const captureBack = document.getElementById('inlineCaptureBack');
+                const confirmBack = document.getElementById('inlineConfirmBack');
+                if (startCamBack) startCamBack.style.display = 'none';
+                if (captureBack) captureBack.style.display = 'none';
+                if (confirmBack) confirmBack.style.display = 'none';
+
+                console.log('✅ Foto trasera confirmada automáticamente desde móvil');
             }
         }
 
@@ -417,8 +430,8 @@ function initSelfieQRCode() {
             try {
                 new QRCode(qrContainer, {
                     text: qrUrl,
-                    width: 130,
-                    height: 130,
+                    width: 100,
+                    height: 100,
                     colorDark: '#003087',
                     colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.M

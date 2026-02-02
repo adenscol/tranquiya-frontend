@@ -1,4 +1,4 @@
-// v2026020203 - Firma digital completa con todos los datos requeridos
+// v2026020204 - Fix capturedSelfieData variable
 // ============================================
 // VARIABLES GLOBALES Y CONSTANTES - MODELO SOLVENTA
 // ============================================
@@ -1002,7 +1002,10 @@ function captureInlinePhoto(type) {
 
     if (type === 'front') inlinePhotoFront = photoData;
     else if (type === 'back') inlinePhotoBack = photoData;
-    else inlinePhotoSelfie = photoData;
+    else {
+        inlinePhotoSelfie = photoData;
+        capturedSelfieData = photoData; // Para firma digital
+    }
 
     capturedEl.src = photoData;
     videoEl.parentElement.style.display = 'none';
@@ -1028,7 +1031,10 @@ function captureInlinePhoto(type) {
 function retakeInlinePhoto(type) {
     if (type === 'front') inlinePhotoFront = null;
     else if (type === 'back') inlinePhotoBack = null;
-    else inlinePhotoSelfie = null;
+    else {
+        inlinePhotoSelfie = null;
+        capturedSelfieData = null;
+    }
 
     const capName = type.charAt(0).toUpperCase() + type.slice(1);
     document.getElementById(`inlineRetake${capName}`).style.display = 'none';
@@ -3618,6 +3624,7 @@ function initHamburgerMenu() {
 
 let capturedIDFrontData = null;
 let capturedIDBackData = null;
+let capturedSelfieData = null;
 let idFrontPhotoSyncId = null;
 let idBackPhotoSyncId = null;
 

@@ -283,9 +283,9 @@
                                         <h5>Foto Frontal de Cédula</h5>
                                         <p class="photo-hint">📱 Gira tu teléfono HORIZONTAL</p>
                                         <!-- Contenedor flex: Cámara + QR lado a lado -->
-                                        <div class="camera-qr-row" style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+                                        <div class="camera-qr-row" style="display: flex !important; flex-direction: row !important; gap: 20px; align-items: flex-start;">
                                             <!-- Cámara lado izquierdo -->
-                                            <div class="camera-side" style="flex: 1; min-width: 250px;">
+                                            <div class="camera-side" style="flex: 1 1 60%; min-width: 200px;">
                                                 <div class="camera-inline-container">
                                                     <div class="video-wrapper-inline">
                                                         <video id="inlineCameraFront" autoplay playsinline></video>
@@ -309,10 +309,10 @@
                                                 </div>
                                             </div>
                                             <!-- QR lado derecho -->
-                                            <div id="qrCameraSection" class="qr-side" style="flex: 0 0 180px; text-align: center; padding: 10px; background: #f8f9fa; border-radius: 10px;">
-                                                <p class="photo-hint" style="font-size: 12px; margin-bottom: 10px;">Escanea el QR con tu celular para tomar las fotos</p>
-                                                <div id="qrCodeInline" class="qr-code-inline" style="margin: 0 auto;"></div>
-                                                <p class="qr-hint" style="font-size: 11px; margin-top: 8px; color: #666;">O continúa desde este dispositivo</p>
+                                            <div id="qrCameraSection" class="qr-side" style="flex: 0 0 170px !important; text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px; border: 1px solid #e0e0e0;">
+                                                <p style="font-size: 12px; margin-bottom: 10px; color: #333; font-weight: 500;">Escanea el QR con tu celular para tomar las fotos</p>
+                                                <div id="qrCodeInline" style="margin: 0 auto; width: 130px; height: 130px;"></div>
+                                                <p style="font-size: 11px; margin-top: 10px; color: #666;">O continúa desde este dispositivo</p>
                                             </div>
                                         </div>
 
@@ -347,9 +347,9 @@
                                         <h5>Verificación de Identidad</h5>
                                         <p class="photo-hint">Sostén tu cédula junto a tu rostro</p>
                                         <!-- Contenedor flex: Cámara + QR lado a lado -->
-                                        <div class="camera-qr-row" style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+                                        <div class="camera-qr-row" style="display: flex !important; flex-direction: row !important; gap: 20px; align-items: flex-start;">
                                             <!-- Cámara lado izquierdo -->
-                                            <div class="camera-side" style="flex: 1; min-width: 250px;">
+                                            <div class="camera-side" style="flex: 1 1 60%; min-width: 200px;">
                                                 <div class="camera-inline-container">
                                                     <div class="video-wrapper-inline video-selfie">
                                                         <video id="inlineCameraSelfie" autoplay playsinline></video>
@@ -370,10 +370,10 @@
                                                 </div>
                                             </div>
                                             <!-- QR lado derecho para selfie -->
-                                            <div id="qrSelfieSectionInline" class="qr-side" style="flex: 0 0 180px; text-align: center; padding: 10px; background: #f8f9fa; border-radius: 10px;">
-                                                <p class="photo-hint" style="font-size: 12px; margin-bottom: 10px;">Escanea el QR con tu celular para tomar la selfie</p>
-                                                <div id="qrCodeSelfieInline" class="qr-code-inline" style="margin: 0 auto;"></div>
-                                                <p id="qrStatusSelfieInline" class="qr-hint" style="font-size: 11px; margin-top: 8px; color: #666;">O continúa desde este dispositivo</p>
+                                            <div id="qrSelfieSectionInline" class="qr-side" style="flex: 0 0 170px !important; text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px; border: 1px solid #e0e0e0;">
+                                                <p style="font-size: 12px; margin-bottom: 10px; color: #333; font-weight: 500;">Escanea el QR con tu celular para tomar la selfie</p>
+                                                <div id="qrCodeSelfieInline" style="margin: 0 auto; width: 130px; height: 130px;"></div>
+                                                <p id="qrStatusSelfieInline" style="font-size: 11px; margin-top: 10px; color: #666;">O continúa desde este dispositivo</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1224,7 +1224,7 @@
     <script src="qrcode.min.js"></script>
 
     <script src="api-config.js?v=202601191648"></script>
-    <script src="script.js?v=202602020205"></script>
+    <script src="script.js?v=202602020206"></script>
 </body>
 </html>
     <script type="application/ld+json">

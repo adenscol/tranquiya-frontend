@@ -1115,25 +1115,47 @@ body {
 
 /* Benefits Section */
 .benefits {
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-lg) 0;
     background-color: var(--bg-light);
 }
 
 h2.section-title {
     text-align: center;
-    font-size: 4rem !important;
-    font-weight: 800 !important;
+    font-size: 2.8rem !important;
+    font-weight: 700 !important;
     color: var(--primary-color) !important;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    margin-top: 0;
     text-transform: none;
-    letter-spacing: -1px;
-    line-height: 1.1;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    padding: 10px 0;
+    padding: 0;
+}
+
+/* Títulos en secciones con fondo azul */
+.section-dark h2.section-title {
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Secciones con fondo azul oscuro */
+.section-dark {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    color: white;
+}
+
+.section-dark p,
+.section-dark h3,
+.section-dark h4,
+.section-dark .section-subtitle {
+    color: rgba(255,255,255,0.9) !important;
 }
 
 .section-subtitle {
@@ -1183,7 +1205,7 @@ h2.section-title {
 
 /* Process Section */
 .process {
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-lg) 0;
     background-color: var(--bg-white);
 }
 
@@ -1191,7 +1213,7 @@ h2.section-title {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
+    margin-top: var(--spacing-md);
 }
 
 .step {
@@ -1201,6 +1223,39 @@ h2.section-title {
     border-radius: var(--border-radius-lg);
     background-color: var(--bg-light);
     transition: var(--transition);
+}
+
+/* Steps en sección oscura */
+.section-dark .step {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.section-dark .step:hover {
+    background-color: rgba(255,255,255,0.2);
+    transform: scale(1.05);
+}
+
+.section-dark .step-number {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.section-dark .step .icon-animated svg {
+    color: white !important;
+}
+
+.section-dark .step .icon-animated svg path,
+.section-dark .step .icon-animated svg rect,
+.section-dark .step .icon-animated svg circle,
+.section-dark .step .icon-animated svg line,
+.section-dark .step .icon-animated svg ellipse {
+    stroke: white !important;
+}
+
+.section-dark .step h3,
+.section-dark .step p {
+    color: white !important;
 }
 
 .step:hover {
@@ -1253,7 +1308,7 @@ h2.section-title {
 
 /* Requirements Section */
 .requirements {
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-lg) 0;
     background-color: var(--bg-light);
 }
 
@@ -1393,9 +1448,60 @@ h2.section-title {
     color: var(--primary-dark);
 }
 
+/* FAQ Section */
+.faq-section {
+    padding: var(--spacing-lg) 0;
+    background-color: var(--bg-white);
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.faq-item {
+    background-color: var(--bg-light);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.faq-question .material-icons {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.faq-question h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.faq-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    padding-left: 2.5rem;
+}
+
 /* Contact Section */
 .contact {
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-lg) 0;
     background-color: var(--bg-light);
 }
 
@@ -1403,7 +1509,7 @@ h2.section-title {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
+    margin-top: var(--spacing-md);
 }
 
 .contact-card {
@@ -1444,6 +1550,32 @@ h2.section-title {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.2rem;
+}
+
+/* Contact cards en sección oscura */
+.section-dark .contact-card {
+    background-color: rgba(255,255,255,0.1);
+    box-shadow: none;
+}
+
+.section-dark .contact-card:hover {
+    background-color: rgba(255,255,255,0.15);
+}
+
+.section-dark .contact-card .material-icons {
+    color: var(--secondary-color);
+}
+
+.section-dark .contact-card h3 {
+    color: white !important;
+}
+
+.section-dark .contact-card p {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+.section-dark .contact-card a {
+    color: var(--secondary-color);
 }
 
 .contact-card a:hover {
@@ -1761,7 +1893,7 @@ h2.section-title {
     }
 
     h2.section-title {
-        font-size: 2.8rem !important;
+        font-size: 2.2rem !important;
     }
 
     .modal-content {

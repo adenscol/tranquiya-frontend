@@ -1499,6 +1499,28 @@ h2.section-title {
     padding-left: 2.5rem;
 }
 
+/* FAQ items en sección oscura */
+.section-dark .faq-item {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.section-dark .faq-item:hover {
+    background-color: rgba(255,255,255,0.15);
+    box-shadow: none;
+}
+
+.section-dark .faq-question .material-icons {
+    color: var(--secondary-color);
+}
+
+.section-dark .faq-question h4 {
+    color: white !important;
+}
+
+.section-dark .faq-item p {
+    color: rgba(255,255,255,0.8) !important;
+}
+
 /* Contact Section */
 .contact {
     padding: var(--spacing-lg) 0;

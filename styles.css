@@ -1456,7 +1456,7 @@ h2.section-title {
 }
 
 .faq-carousel-wrapper {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
     overflow: hidden;
     padding: var(--spacing-sm) 0;
